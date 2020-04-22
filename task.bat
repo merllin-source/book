@@ -1,5 +1,5 @@
 e:
-cd phpstudy_pro\www\log\
+cd phpstudy_pro\www\book\
 
 git rm -r --cached .
 git add .

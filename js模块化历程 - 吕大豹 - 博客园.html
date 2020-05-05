@@ -1,0 +1,2504 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)https://www.cnblogs.com/lvdabao/p/js-modules-develop.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="origin">
+    <meta property="og:description" content="这是一篇关于js模块化历程的长长的流水账，记录js模块化思想的诞生与变迁，展望ES6模块化标准的未来。经历过这段历史的人或许会感到沧桑，没经历过的人也应该知道这段历史。无模块时代在ajax还未提出之前">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>js模块化历程 - 吕大豹 - 博客园</title>
+    
+    <link rel="stylesheet" href="./js模块化历程 - 吕大豹 - 博客园_files/blog-common.min.css">
+    <link id="MainCss" rel="stylesheet" href="./js模块化历程 - 吕大豹 - 博客园_files/bundle-unlimitedsunlight.min.css">
+    <link type="text/css" rel="stylesheet" href="./js模块化历程 - 吕大豹 - 博客园_files/custom.css">
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./js模块化历程 - 吕大豹 - 博客园_files/bundle-unlimitedsunlight-mobile.min.css">
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/lvdabao/rss">
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/lvdabao/rsd.xml">
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/lvdabao/wlwmanifest.xml">
+    <script async="" src="./js模块化历程 - 吕大豹 - 博客园_files/analytics.js.下载"></script><script type="text/javascript" src="./js模块化历程 - 吕大豹 - 博客园_files/encoder.js.下载"></script><script src="./js模块化历程 - 吕大豹 - 博客园_files/amp4ads-host-v0.js.下载"></script><script src="./js模块化历程 - 吕大豹 - 博客园_files/pubads_impl_rendering_2020032401.js.下载"></script><script src="./js模块化历程 - 吕大豹 - 博客园_files/jquery-2.2.0.min.js.下载"></script>
+    <script src="./js模块化历程 - 吕大豹 - 博客园_files/blog-common.min.js.下载"></script>
+    <script>
+        var currentBlogId = 148826;
+        var currentBlogApp = 'lvdabao';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'UnlimitedSunlight';
+    </script>
+    
+    
+    
+<link rel="preload" href="./js模块化历程 - 吕大豹 - 博客园_files/f.txt" as="script"><script type="text/javascript" src="./js模块化历程 - 吕大豹 - 博客园_files/f.txt"></script><script src="./js模块化历程 - 吕大豹 - 博客园_files/pubads_impl_2020032401.js.下载" async=""></script><meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no"><link rel="prefetch" href="https://tpc.googlesyndication.com/safeframe/1-0-37/html/container.html"></head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html"><script type="text/javascript">window['__document_write_ajax_callbacks__']['2']();</script><script>window['__document_write_ajax_callbacks__']['1']();</script></div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/lvdabao/"><img id="blogLogo" src="./js模块化历程 - 吕大豹 - 博客园_files/logo.gif" alt="返回主页"></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/lvdabao/">吕大豹</a>
+</h1>
+<h2>
+要技艺超群，要予人温暖
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/lvdabao/">
+首页</a>
+</li>
+<li>
+
+
+</li>
+<li>
+</li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/lvdabao/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+115&nbsp; </span>
+<span id="stats_article_count">文章 - 
+12&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+1561</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html">js模块化历程</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div>这是一篇关于js模块化历程的长长的流水账，记录js模块化思想的诞生与变迁，展望ES6模块化标准的未来。经历过这段历史的人或许会感到沧桑，没经历过的人也应该知道这段历史。</div>
+<div>
+<h3>&nbsp;</h3>
+<h3>无模块时代</h3>
+<div>在ajax还未提出之前，js还只是一种“玩具语言”，由Brendan Eich花了不到十天时间发明，用来在网页上进行表单校验、实现简单的动画效果等等，你可以回想一下那个网页上到处有公告块飘来飘去的时代。</div>
+<div>这个时候并没有前端工程师，服务端工程师只需在页面上随便写写js就能搞定需求。那个时候的前端代码大概像这样：</div>
+<div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">if</span><span style="color: #000000;">(xx){
+     </span><span style="color: #008000;">//</span><span style="color: #008000;">.......</span>
+<span style="color: #000000;">}
+</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+     </span><span style="color: #008000;">//</span><span style="color: #008000;">xxxxxxxxxxx</span>
+<span style="color: #000000;">}
+</span><span style="color: #0000ff;">for</span>(<span style="color: #0000ff;">var</span> i=0; i&lt;10; i++<span style="color: #000000;">){
+     </span><span style="color: #008000;">//</span><span style="color: #008000;">........</span>
+<span style="color: #000000;">}
+element.onclick </span>= <span style="color: #0000ff;">function</span><span style="color: #000000;">(){
+     </span><span style="color: #008000;">//</span><span style="color: #008000;">.......</span>
+}</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<div>代码简单的堆在一起，只要能从上往下依次执行就可以了。</div>
+<div>
+<h3>&nbsp;</h3>
+<h3><strong>模块萌芽时代</strong></h3>
+<div>2006年，ajax的概念被提出，前端拥有了主动向服务端发送请求并操作返回数据的能力，随着Google将此概念的发扬光大，传统的网页慢慢的向“富客户端”发展。前端的业务逻辑越来越多，代码也越来越多，于是一些问题就暴漏了出来：</div>
+<div><span style="font-size: 14px;"><strong>1. 全局变量的灾难</strong></span></div>
+<div>小明定义了 i=1</div>
+<div>小刚在后续的代码里：i=0</div>
+<div>小明在接下来的代码里：if(i==1){...} //悲剧</div>
+<div><span style="font-size: 14px;">&nbsp;<strong>2. 函数命名冲突</strong></span></div>
+<div>项目中通常会把一些通用的函数封装成一个文件，常见的名字有utils.js、common.js...</div>
+<div>小明定义了一个函数：function formatData(){ &nbsp; }</div>
+<div>小刚想实现类似功能，于是这么写：function formatData2(){ &nbsp; }</div>
+<div>小光又有一个类似功能，于是：function formatData3(){ &nbsp; }</div>
+<div>......</div>
+<div>避免命名冲突就只能这样靠丑陋的方式人肉进行。</div>
+<div><span style="font-size: 14px;">&nbsp;<strong>3. 依赖关系不好管理</strong></span></div>
+<div>b.js依赖a.js，标签的书写顺序必须是</div>
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">script </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="text/javascript"</span><span style="color: #ff0000;"> src</span><span style="color: #0000ff;">="a.js"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">script</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">script </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="text/javascript"</span><span style="color: #ff0000;"> src</span><span style="color: #0000ff;">="b.js"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">script</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+</div>
+<div>顺序不能错，也不能漏写某个。在多人开发的时候很难协调。</div>
+<div>&nbsp;</div>
+<div>
+<div>萌芽时代的解决方案：</div>
+<div>
+<div><span style="font-size: 14px;"><strong>1. 用自执行函数来包装代码</strong></span></div>
+<div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>modA = <span style="color: #0000ff;">function</span><span style="color: #000000;">(){
+     </span><span style="color: #0000ff;">var</span> a,b; <span style="color: #008000;">//</span><span style="color: #008000;">变量a、b外部不可见</span>
+     <span style="color: #0000ff;">return</span><span style="color: #000000;"> {
+          add : </span><span style="color: #0000ff;">function</span><span style="color: #000000;">(c){
+               a </span>+ b +<span style="color: #000000;"> c;
+          },
+          format: </span><span style="color: #0000ff;">function</span><span style="color: #000000;">(){
+               </span><span style="color: #008000;">//</span><span style="color: #008000;">......</span>
+<span style="color: #000000;">          }
+     }
+}()</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+</div>
+<div>这样function内部的变量就对全局隐藏了，达到是封装的目的。但是这样还是有缺陷的，modA这个变量还是暴漏到全局了，随着模块的增多，全局变量还是会越来越多。</div>
+<div><span style="font-size: 14px;">&nbsp;<strong>2. java风格的命名空间</strong></span></div>
+<div>为了避免全局变量造成的冲突，人们想到或许可以用多级命名空间来进行管理，于是，代码就变成了这个风格：</div>
+<div>
+<div class="cnblogs_code">
+<pre>app.util.modA =<span style="color: #000000;"> xxx;
+app.tools.modA </span>=<span style="color: #000000;"> xxx;
+app.tools.modA.format </span>= xxx;</pre>
+</div>
+</div>
+<div>Yahoo的YUI早期就是这么做的，调用的时候不得不这么写：</div>
+<div>
+<div class="cnblogs_code">
+<pre>app.tools.modA.format();</pre>
+</div>
+</div>
+<div>这样调用函数，写写都会觉得恶心，所以这种方式并没有被很多人采用，YUI后来也不用这种方式了。</div>
+<div><span style="font-size: 14px;">&nbsp;<strong>3. jQuery风格的匿名自执行函数</strong></span></div>
+<div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>(<span style="color: #0000ff;">function</span><span style="color: #000000;">(window){
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">代码</span>
+<span style="color: #000000;">
+    window.jQuery </span>= window.$ = jQuery;<span style="color: #008000;">//</span><span style="color: #008000;">通过给window添加属性而暴漏到全局</span>
+})(window);</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+</div>
+<div>jQuery的封装风格曾经被很多框架模仿，通过匿名函数包装代码，所依赖的外部变量传给这个函数，在函数内部可以使用这些依赖，然后在函数的最后把模块自身暴漏给window。</div>
+<div>如果需要添加扩展，则可以作为jQuery的插件，把它挂载到$上。</div>
+<div>这种风格虽然灵活了些，但并未解决根本问题：所需依赖还是得外部提前提供、还是增加了全局变量。</div>
+<div>
+<h3>&nbsp;</h3>
+<h3><strong>模块化面临什么问题</strong></h3>
+<div>从以上的尝试中，可以归纳出js模块化需要解决那些问题：</div>
+<div>1. 如何安全的包装一个模块的代码？（不污染模块外的任何代码）</div>
+<div>2. 如何唯一标识一个模块？</div>
+<div>3. 如何优雅的把模块的API暴漏出去？（不能增加全局变量）</div>
+<div>4. 如何方便的使用所依赖的模块？</div>
+<div>围绕着这些问题，js模块化开始了一段艰苦而曲折的征途。</div>
+<div>&nbsp;</div>
+<h3>&nbsp;</h3>
+<h3><strong>源自nodejs的规范CommonJs</strong></h3>
+<div>2009年，nodejs横空出世，开创了一个新纪元，人们可以用js来编写服务端的代码了。如果说浏览器端的js即便没有模块化也可以忍的话，那服务端是万万不能的。</div>
+<div>大牛云集的CommonJs社区发力，制定了Modules/1.0（<a href="http://wiki.commonjs.org/wiki/Modules/1.0" target="_blank">http://wiki.commonjs.org/wiki/Modules/1.0</a>）规范，首次定义了一个模块应该长啥样。具体来说，Modules/1.0规范包含以下内容：</div>
+<blockquote>
+<div><span style="font-size: 14px;">1. 模块的标识应遵循的规则（书写规范）</span></div>
+<div><span style="font-size: 14px;">2. 定义全局函数require，通过传入模块标识来引入其他模块，执行的结果即为别的模块暴漏出来的API</span></div>
+<div><span style="font-size: 14px;">3. 如果被require函数引入的模块中也包含依赖，那么依次加载这些依赖</span></div>
+<div><span style="font-size: 14px;">4. 如果引入模块失败，那么require函数应该报一个异常</span></div>
+<div><span style="font-size: 14px;">5. 模块通过变量exports来向往暴漏API，exports只能是一个对象，暴漏的API须作为此对象的属性。</span></div>
+</blockquote>
+<div>此规范一出，立刻产生了良好的效果，由于其简单而直接，在nodejs中，这种模块化方案立刻被推广开了。</div>
+<div>遵循commonjs规范的代码看起来是这样的：（来自官方的例子）</div>
+<div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">math.js</span>
+exports.add = <span style="color: #0000ff;">function</span><span style="color: #000000;">() {
+    </span><span style="color: #0000ff;">var</span> sum = 0, i = 0, args = arguments, l =<span style="color: #000000;"> args.length;
+    </span><span style="color: #0000ff;">while</span> (i &lt;<span style="color: #000000;"> l) {
+        sum </span>+= args[i++<span style="color: #000000;">];
+    }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> sum;
+};</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">increment.js</span>
+<span style="color: #0000ff;">var</span> add = require('math'<span style="color: #000000;">).add;
+exports.increment </span>= <span style="color: #0000ff;">function</span><span style="color: #000000;">(val) {
+    </span><span style="color: #0000ff;">return</span> add(val, 1<span style="color: #000000;">);
+};</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">program.js</span>
+<span style="color: #0000ff;">var</span> inc = require('increment'<span style="color: #000000;">).increment;
+</span><span style="color: #0000ff;">var</span> a = 1<span style="color: #000000;">;
+inc(a); </span><span style="color: #008000;">//</span><span style="color: #008000;"> 2</span></pre>
+</div>
+<div>
+<h3>&nbsp;</h3>
+<h3><strong>服务端向前端进军</strong></h3>
+<div>Modules/1.0规范源于服务端，无法直接用于浏览器端，原因表现为：</div>
+<div>1. 外层没有function包裹，变量全暴漏在全局。如上面例子中increment.js中的add。</div>
+<div>2. 资源的加载方式与服务端完全不同。服务端require一个模块，直接就从硬盘或者内存中读取了，消耗的时间可以忽略。而浏览器则不同，需要从服务端来下载这个文件，然后运行里面的代码才能得到API，需要花费一个http请求，也就是说，require后面的一行代码，需要资源请求完成才能执行。由于浏览器端是以插入&lt;script&gt;标签的形式来加载资源的（ajax方式不行，有跨域问题），没办法让代码同步执行，所以像commonjs那样的写法会直接报错。</div>
+<div>&nbsp;</div>
+<div>所以，社区意识到，要想在浏览器环境中也能模块化，需要对规范进行升级。顺便说一句，CommonJs原来是叫ServerJs，从名字可以看出是专攻服务端的，为了统一前后端而改名CommonJs。（论起名的重要性~）</div>
+<div>而就在社区讨论制定下一版规范的时候，内部发生了比较大的分歧，分裂出了三个主张，渐渐的形成三个不同的派别：</div>
+<div><span style="font-size: 14px;"><strong>1.Modules/1.x派</strong></span></div>
+<div>这一波人认为，在现有基础上进行改进即可满足浏览器端的需要，既然浏览器端需要function包装，需要异步加载，那么新增一个方案，能把现有模块转化为适合浏览器端的就行了，有点像“保皇派”。基于这个主张，制定了Modules/Transport（<a href="http://wiki.commonjs.org/wiki/Modules/Transport" target="_blank">http://wiki.commonjs.org/wiki/Modules/Transport</a>）规范，提出了先通过工具把现有模块转化为复合浏览器上使用的模块，然后再使用的方案。</div>
+<div>browserify就是这样一个工具，可以把nodejs的模块编译成浏览器可用的模块。（Modules/Transport规范晦涩难懂，我也不确定browserify跟它是何关联，有知道的朋友可以讲一下）</div>
+<div>目前的最新版是Modules/1.1.1（<a href="http://wiki.commonjs.org/wiki/Modules/1.1.1" target="_blank">http://wiki.commonjs.org/wiki/Modules/1.1.1</a>），增加了一些require的属性，以及模块内增加module变量来描述模块信息，变动不大。</div>
+<div>&nbsp;<span style="font-size: 14px;"><strong>2.&nbsp;Modules/Async派</strong></span></div>
+<div>这一波人有点像“革新派”，他们认为浏览器与服务器环境差别太大，不能沿用旧的模块标准。既然浏览器必须异步加载代码，那么模块在定义的时候就必须指明所依赖的模块，然后把本模块的代码写在回调函数里。模块的加载也是通过下载-回调这样的过程来进行，这个思想就是AMD的基础，由于“革新派”与“保皇派”的思想无法达成一致，最终从CommonJs中分裂了出去，独立制定了浏览器端的js模块化规范AMD（Asynchronous Module Definition）（<a href="https://github.com/amdjs/amdjs-api/wiki/AMD" target="_blank">https://github.com/amdjs/amdjs-api/wiki/AMD</a>）</div>
+<div>本文后续会继续讨论AMD规范的内容。</div>
+<div><span style="font-size: 14px;"><strong>&nbsp;3.&nbsp;Modules/2.0派</strong></span></div>
+<div>这一波人有点像“中间派”，既不想丢掉旧的规范，也不想像AMD那样推到重来。他们认为，Modules/1.0固然不适合浏览器，但它里面的一些理念还是很好的，（如通过require来声明依赖），新的规范应该兼容这些，AMD规范也有它好的地方（例如模块的预先加载以及通过return可以暴漏任意类型的数据，而不是像commonjs那样exports只能为object），也应采纳。最终他们制定了一个Modules/Wrappings（<a href="http://wiki.commonjs.org/wiki/Modules/Wrappings" target="_blank">http://wiki.commonjs.org/wiki/Modules/Wrappings</a>）规范，此规范指出了一个模块应该如何“包装”，包含以下内容：</div>
+<blockquote>
+<div><span style="font-size: 14px;">1. 全局有一个module变量，用来定义模块</span></div>
+<div><span style="font-size: 14px;">2. 通过module.declare方法来定义一个模块</span></div>
+<div><span style="font-size: 14px;">3. module.declare方法只接收一个参数，那就是模块的factory，次factory可以是函数也可以是对象，如果是对象，那么模块输出就是此对象。</span></div>
+<div><span style="font-size: 14px;">4.&nbsp;模块的factory函数传入三个参数：require,exports,module，用来引入其他依赖和导出本模块API</span></div>
+<div><span style="font-size: 14px;">5. 如果factory函数最后明确写有return数据（js函数中不写return默认返回undefined），那么return的内容即为模块的输出。</span></div>
+</blockquote>
+<div>使用该规范的例子看起来像这样：</div>
+<div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">可以使用exprots来对外暴漏API</span>
+module.declare(<span style="color: #0000ff;">function</span><span style="color: #000000;">(require, exports, module)
+{
+    exports.foo </span>= "bar"<span style="color: #000000;">;
+});</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">也可以直接return来对外暴漏数据</span>
+module.declare(<span style="color: #0000ff;">function</span><span style="color: #000000;">(require)
+{
+</span><span style="color: #0000ff;">return</span> { foo: "bar"<span style="color: #000000;"> };
+});</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<div>
+<h3>&nbsp;</h3>
+<h3><strong>AMD/RequireJs的崛起与妥协</strong></h3>
+<div>AMD的思想正如其名，异步加载所需的模块，然后在回调函数中执行主逻辑。这正是我们在浏览器端开发所习惯了的方式，其作者亲自实现了符合AMD规范的requirejs，AMD/RequireJs迅速被广大开发者所接受。</div>
+<div>AMD规范包含以下内容：</div>
+<blockquote>
+<div><span style="font-size: 14px;">1. 用全局函数define来定义模块，用法为：define(id?, dependencies?, factory);</span></div>
+<div><span style="font-size: 14px;">2. id为模块标识，遵从CommonJS Module Identifiers规范</span></div>
+<div><span style="font-size: 14px;">3.&nbsp;dependencies为依赖的模块数组，在factory中需传入形参与之一一对应</span></div>
+<div><span style="font-size: 14px;">4. 如果dependencies的值中有"require"、"exports"或"module"，则与commonjs中的实现保持一致</span></div>
+<div><span style="font-size: 14px;">5. 如果dependencies省略不写，则默认为["require", "exports", "module"]，factory中也会默认传入require,exports,module</span></div>
+<div><span style="font-size: 14px;">6. 如果factory为函数，模块对外暴漏API的方法有三种：return任意类型的数据、exports.xxx=xxx、module.exports=xxx</span></div>
+<div><span style="font-size: 14px;">7. 如果factory为对象，则该对象即为模块的返回值</span></div>
+</blockquote>
+<div>基于以上几点基本规范，我们便可以用这样的方式来进行模块化组织代码了：</div>
+<div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">a.js</span>
+define(<span style="color: #0000ff;">function</span><span style="color: #000000;">(){
+     console.log(</span>'a.js执行'<span style="color: #000000;">);
+     </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> {
+          hello: </span><span style="color: #0000ff;">function</span><span style="color: #000000;">(){
+               console.log(</span>'hello, a.js'<span style="color: #000000;">);
+          }
+     }
+});</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">b.js</span>
+define(<span style="color: #0000ff;">function</span><span style="color: #000000;">(){
+     console.log(</span>'b.js执行'<span style="color: #000000;">);
+     </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> {
+          hello: </span><span style="color: #0000ff;">function</span><span style="color: #000000;">(){
+               console.log(</span>'hello, b.js'<span style="color: #000000;">);
+          }
+     }
+});</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">main.js</span>
+require(['a', 'b'], <span style="color: #0000ff;">function</span><span style="color: #000000;">(a, b){
+     console.log(</span>'main.js执行'<span style="color: #000000;">);
+     a.hello();
+     $(</span>'#b').click(<span style="color: #0000ff;">function</span><span style="color: #000000;">(){
+          b.hello();
+     });
+})</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<div>
+<div>上面的main.js被执行的时候，会有如下的输出：</div>
+<div><span style="font-size: 12px;">a.js执行</span><br><span style="font-size: 12px;">
+b.js执行</span><br><span style="font-size: 12px;">
+main.js执行</span><br><span style="font-size: 12px;">
+hello, a.js</span></div>
+<div>在点击按钮后，会输出：</div>
+<div><span style="font-size: 12px;">hello, b.js</span></div>
+<div>这结局，如你所愿吗？大体来看，是没什么问题的，因为你要的两个hello方法都正确的执行了。</div>
+<div>但是如果细细来看，b.js被预先加载并且<strong>预先执行</strong>了，（第二行输出），b.hello这个方法是在点击了按钮之后才会执行，如果用户压根就没点，那么b.js中的代码应不应该执行呢？</div>
+<div>这其实也是AMD/RequireJs被吐槽的一点，预先下载没什么争议，由于浏览器的环境特点，被依赖的模块肯定要预先下载的。问题在于，是否需要预先执行？如果一个模块依赖了十个其他模块，那么在本模块的代码执行之前，要先把其他十个模块的代码都执行一遍，不管这些模块是不是马上会被用到。这个性能消耗是不容忽视的。</div>
+<div>另一点被吐槽的是，在定义模块的时候，要把所有依赖模块都罗列一遍，而且还要在factory中作为形参传进去，要写两遍很大一串模块名称，像这样：</div>
+<div>
+<div class="cnblogs_code">
+<pre>define(['a', 'b', 'c', 'd', 'e', 'f', 'g'], <span style="color: #0000ff;">function</span>(a, b, c, d, e, f, g){  ..... })</pre>
+</div>
+</div>
+<div>编码过程略有不爽。</div>
+<div>
+<div>好的一点是，AMD保留了commonjs中的require、exprots、module这三个功能（上面提到的第4条）。你也可以不把依赖罗列在dependencies数组中。而是在代码中用require来引入，如下：</div>
+<div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>define(<span style="color: #0000ff;">function</span><span style="color: #000000;">(){
+     console.log(</span>'main2.js执行'<span style="color: #000000;">);
+
+     require([</span>'a'], <span style="color: #0000ff;">function</span><span style="color: #000000;">(a){
+          a.hello();    
+     });
+
+     $(</span>'#b').click(<span style="color: #0000ff;">function</span><span style="color: #000000;">(){
+          require([</span>'b'], <span style="color: #0000ff;">function</span><span style="color: #000000;">(b){
+               b.hello();
+          });
+     });
+});</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<div>
+<div>我们在define的参数中未写明依赖，那么main2.js在执行的时候，就不会预先加载a.js和b.js，只是执行到require语句的时候才会去加载，上述代码的输出如下：</div>
+<div><span style="font-size: 12px;">main2.js执行</span><br><span style="font-size: 12px;">
+a.js执行</span><br><span style="font-size: 12px;">
+hello, a.js</span></div>
+<div>可以看到b.js并未执行，从网络请求中看，b.js也并未被下载。只有在按钮被点击的时候b.js才会被下载执行，并且在回调函数中执行模块中的方法。这就是名副其实的“懒加载”了。</div>
+<div>&nbsp;</div>
+<div>这样的懒加载无疑会大大减轻初始化时的损耗（下载和执行都被省去了），但是弊端也是显而易见的，在后续执行a.hello和b.hello时，必须得实时下载代码然后在回调中才能执行，这样的用户体验是不好的，用户的操作会有明显的延迟卡顿。</div>
+<div>但这样的现实并非是无法接受的，毕竟是浏览器环境，我们已经习惯了操作网页时伴随的各种loading。。。</div>
+<div>&nbsp;</div>
+<div>但是话说过来，有没有更好的方法来处理问题呢？资源的下载阶段还是预先进行，资源执行阶段后置，等到需要的时候再执行。这样一种折衷的方式，能够融合前面两种方式的优点，而又回避了缺点。</div>
+<div>这就是Modules/Wrappings规范，还记得前面提到的“中间派”吗？</div>
+<div>在AMD的阵营中，也有一部分人提出这样的观点，代码里写一堆回调实在是太恶心了，他们更喜欢这样来使用模块：</div>
+<div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">var</span> a = require('a'<span style="color: #000000;">);
+a.hello();
+
+$(</span>'#b').click(<span style="color: #0000ff;">function</span><span style="color: #000000;">(){
+        </span><span style="color: #0000ff;">var</span> b = require('b'<span style="color: #000000;">);
+        b.hello();
+});</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<div>
+<div>于是，AMD也终于决定作妥协，兼容Modules/Wrappings的写法，但只是<strong>部分兼容</strong>，例如并没有使用module.declare来定义模块，而还是用define，模块的执行时机也没有改变，依旧是预先执行。因此，AMD将此兼容称为Simplified CommonJS wrapping，即并不是完整的实现Modules/Wrappings。</div>
+<div>作了此兼容后，使用requirejs就可以这么写代码了：</div>
+<div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">d.js</span>
+define(<span style="color: #0000ff;">function</span><span style="color: #000000;">(require, exports, module){
+     console.log(</span>'d.js执行'<span style="color: #000000;">);
+     </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> {
+          helloA: </span><span style="color: #0000ff;">function</span><span style="color: #000000;">(){
+               </span><span style="color: #0000ff;">var</span> a = require('a'<span style="color: #000000;">);
+               a.hello();
+          },
+          run: </span><span style="color: #0000ff;">function</span><span style="color: #000000;">(){
+               $(</span>'#b').click(<span style="color: #0000ff;">function</span><span style="color: #000000;">(){
+                    </span><span style="color: #0000ff;">var</span> b = require('b'<span style="color: #000000;">);
+                    b.hello();
+               });
+          }
+     }
+});</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<div>
+<div>注意定义模块时候的轻微差异，dependencies数组为空，但是factory函数的形参必须手工写上require,exports,module，（这不同于之前的dependencies和factory形参全不写），这样写即可使用Simplified CommonJS wrapping风格，与commonjs的格式一致了。</div>
+<div>虽然使用上看起来简单，然而在理解上却给后人埋下了一个<strong>大坑。</strong>因为AMD只是支持了这样的语法，而并没有真正实现模块的延后执行。什么意思呢？上面的代码，正常来讲应该是预先下载a.js和b.js，然后在执行模块的helloA方法的时候开始执行a.js里面的代码，在点击按钮的时候开始执行b.js中的方法。实际却不是这样，只要此模块被别的模块引入，a.js和b.js中的代码还是被预先执行了。</div>
+<div>我们把上面的代码命名为d.js，在别的地方使用它：</div>
+<div>
+<div class="cnblogs_code">
+<pre>require(['d'], <span style="color: #0000ff;">function</span><span style="color: #000000;">(d){
+   
+});</span></pre>
+</div>
+<div>
+<div>上面的代码会输出</div>
+<div><span style="font-size: 12px;">a.js执行</span><br><span style="font-size: 12px;">
+b.js执行</span><br><span style="font-size: 12px;">
+d.js执行</span></div>
+<div>可以看出，尽管还未调用d模块的API，里面所依赖的a.js和b.js中的代码已经执行了。AMD的这种只实现语法却未真正实现功能的做法容易给人造成理解上的困难，被<strong>强烈吐槽</strong>。</div>
+<div>（在requirejs2.0中，作者声明已经处理了此问题（<a href="https://github.com/jrburke/requirejs/wiki/Upgrading-to-RequireJS-2.0#delayed" target="_blank">https://github.com/jrburke/requirejs/wiki/Upgrading-to-RequireJS-2.0#delayed</a>），但是我用2.1.20版测试的时候还是会预先执行，我有点不太明白原因，如果有懂的高手请指教）</div>
+<div>
+<h3>&nbsp;</h3>
+<h3><strong>兼容并包的CMD/seajs</strong></h3>
+<div>既然requirejs有上述种种不甚优雅的地方，所以必然会有新东西来完善它，这就是后起之秀seajs，seajs的作者是国内大牛淘宝前端布道者玉伯。seajs全面拥抱Modules/Wrappings规范，不用requirejs那样回调的方式来编写模块。而它也不是完全按照Modules/Wrappings规范，seajs并没有使用declare来定义模块，而是使用和requirejs一样的define，或许作者本人更喜欢这个名字吧。（然而这或多或少又会给人们造成理解上的混淆），用seajs定义模块的写法如下：</div>
+<div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">a.js</span>
+define(<span style="color: #0000ff;">function</span><span style="color: #000000;">(require, exports, module){
+     console.log(</span>'a.js执行'<span style="color: #000000;">);
+     </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> {
+          hello: </span><span style="color: #0000ff;">function</span><span style="color: #000000;">(){
+               console.log(</span>'hello, a.js'<span style="color: #000000;">);
+          }
+     }
+});</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">b.js</span>
+define(<span style="color: #0000ff;">function</span><span style="color: #000000;">(require, exports, module){
+     console.log(</span>'b.js执行'<span style="color: #000000;">);
+     </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> {
+          hello: </span><span style="color: #0000ff;">function</span><span style="color: #000000;">(){
+               console.log(</span>'hello, b.js'<span style="color: #000000;">);
+          }
+     }
+});</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">main.js</span>
+define(<span style="color: #0000ff;">function</span><span style="color: #000000;">(require, exports, module){
+     console.log(</span>'main.js执行'<span style="color: #000000;">);
+
+     </span><span style="color: #0000ff;">var</span> a = require('a'<span style="color: #000000;">);
+     a.hello();    
+
+     $(</span>'#b').click(<span style="color: #0000ff;">function</span><span style="color: #000000;">(){
+          </span><span style="color: #0000ff;">var</span> b = require('b'<span style="color: #000000;">);
+          b.hello();
+     });
+    
+});</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<div>
+<div>定义模块时无需罗列依赖数组，在factory函数中需传入形参require,exports,module，然后它会调用factory函数的toString方法，对函数的内容进行正则匹配，通过匹配到的require语句来分析依赖，这样就真正实现了commonjs风格的代码。</div>
+<div>上面的main.js执行会输出如下：</div>
+<div><span style="font-size: 12px;">main.js执行</span><br><span style="font-size: 12px;">
+a.js执行</span><br><span style="font-size: 12px;">
+hello, a.js</span></div>
+<div>a.js和b.js都会预先下载，但是b.js中的代码却没有执行，因为还没有点击按钮。当点击按钮的时候，会输出如下：</div>
+<div><span style="font-size: 12px;">b.js执行</span><br><span style="font-size: 12px;">
+hello, b.js</span></div>
+<div>可以看到b.js中的代码此时才执行。这样就真正实现了“就近书写，延迟执行“，不可谓不优雅。</div>
+<div>&nbsp;</div>
+<div>如果你一定要挑出一点不爽的话，那就是b.js的预先下载了。你可能不太想一开始就下载好所有的资源，希望像requirejs那样，等点击按钮的时候再开始下载b.js。本着兼容并包的思想，seajs也实现了这一功能，提供require.async API，在点击按钮的时候，只需这样写：</div>
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">var</span> b = require.async('b'<span style="color: #000000;">);
+b.hello();</span></pre>
+</div>
+<div>
+<div>b.js就不会在一开始的时候就加载了。这个API可以说是简单漂亮。</div>
+<div>&nbsp;</div>
+<div>关于模块对外暴漏API的方式，seajs也是融合了各家之长，支持commonjs的exports.xxx = xxx和module.exports = xxx的写法，也支持AMD的return写法，暴露的API可以是任意类型。</div>
+<div>&nbsp;</div>
+<div>你可能会觉得seajs无非就是一个抄，把别人家的优点都抄过来组合了一下。其实不然，seajs是commonjs规范在浏览器端的践行者，对于requirejs的优点也加以吸收。看人家的名字，就是海纳百川之意。（再论起名的重要性~），既然它的思想是海纳百川，讨论是不是抄就没意义了。</div>
+<div>鉴于seajs融合了太多的东西，已经无法说它遵循哪个规范了，所以玉伯干脆就自立门户，起名曰CMD（Common Module Definition）规范，有了纲领，就不会再存在非议了。</div>
+<div>
+<h3>&nbsp;</h3>
+<h3><strong>面向未来的ES6模块标准</strong></h3>
+<div>既然模块化开发的呼声这么高，作为官方的ECMA必然要有所行动，js模块很早就列入草案，终于在2015年6月份发布了ES6正式版。然而，可能由于所涉及的技术还未成熟，ES6移除了关于模块如何加载/执行的内容，只保留了定义、引入模块的语法。所以说现在的ES6 Module还只是个雏形，半成品都算不上。但是这并不妨碍我们先窥探一下ES6模块标准。</div>
+<div>定义一个模块不需要专门的工作，因为一个模块的作用就是对外提供API，所以只需用exoprt导出就可以了：</div>
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">方式一, a.js</span>
+export <span style="color: #0000ff;">var</span> a = 1<span style="color: #000000;">;
+export </span><span style="color: #0000ff;">var</span> obj = {name: 'abc', age: 20<span style="color: #000000;">};
+export </span><span style="color: #0000ff;">function</span> run(){....}</pre>
+</div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">方式二, b.js</span>
+<span style="color: #0000ff;">var</span> a = 1<span style="color: #000000;">;
+</span><span style="color: #0000ff;">var</span> obj = {name: 'abc', age: 20<span style="color: #000000;">};
+</span><span style="color: #0000ff;">function</span><span style="color: #000000;"> run(){....}
+export {a, obj, run}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化历程 - 吕大豹 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<div>
+<div>使用模块的时候用import关键字，如：</div>
+<div>
+<div class="cnblogs_code">
+<pre>import {run as go} from  'a'<span style="color: #000000;">
+run()</span></pre>
+</div>
+<div>
+<div>如果想要使用模块中的全部API，也可以不必把每个都列一遍，使用module关键字可以全部引入，用法：</div>
+<div>
+<div class="cnblogs_code">
+<pre>module foo from 'a'<span style="color: #000000;">
+console.log(foo.obj);
+a.run();</span></pre>
+</div>
+</div>
+<div>在花括号中指明需使用的API，并且可以用as指定别名。</div>
+<div>&nbsp;</div>
+<div>ES6 Module的基本用法就是这样，可以看到确实是有些薄弱，而且目前还没有浏览器能支持，只能说它是面向未来了。</div>
+<div>目前我们可以使用一些第三方模块来对ES6进行编译，转化为可以使用的ES5代码，或者是符合AMD规范的模块，例如ES6 module transpiler。另外有一个项目也提供了加载ES6模块的方法，es6-module-loader(<a href="https://github.com/ModuleLoader/es6-module-loader">https://github.com/ModuleLoader/es6-module-loader</a>)，不过这都是一些临时的方案，或许明年ES7一发布，模块的加载有了标准，浏览器给与了实现，这些工具也就没有用武之地了。</div>
+<div>&nbsp;</div>
+<div>未来还是很值得期待的，从语言的标准上支持模块化，js就可以更加自信的走进大规模企业级开发。</div>
+<div>=======================</div>
+<div>
+<div>参考资料：</div>
+<div><a href="https://github.com/seajs/seajs/issues/588">https://github.com/seajs/seajs/issues/588</a></div>
+<div><a href="http://wiki.commonjs.org/wiki/Modules/AsynchronousDefinition">http://wiki.commonjs.org/wiki/Modules/AsynchronousDefinition</a></div>
+<div><a href="http://www.cnblogs.com/snandy/archive/2012/03/12/2390782.html">http://www.cnblogs.com/snandy/archive/2012/03/12/2390782.html</a></div>
+<div><a href="http://www.cnblogs.com/snandy/archive/2012/03/30/2423612.html">http://www.cnblogs.com/snandy/archive/2012/03/30/2423612.html</a></div>
+<div><a href="https://imququ.com/post/amd-simplified-commonjs-wrapping.html">https://imququ.com/post/amd-simplified-commonjs-wrapping.html</a></div>
+<div><a href="https://github.com/jrburke/requirejs/wiki/Upgrading-to-RequireJS-2.0#delayed">https://github.com/jrburke/requirejs/wiki/Upgrading-to-RequireJS-2.0#delayed</a></div>
+</div>
+</div>
+</div>
+<div>&nbsp;</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block"><div id="BlogPostCategory">
+    分类: 
+            <a href="https://www.cnblogs.com/lvdabao/category/536798.html" target="_blank">javascript相关</a></div>
+
+
+    <div id="blog_post_info">
+<div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(4865546,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+        <a id="green_channel_follow" onclick="follow(&#39;87114f06-25ab-e211-83e8-90b11c0b17d6&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./js模块化历程 - 吕大豹 - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./js模块化历程 - 吕大豹 - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/lvdabao/" target="_blank"><img src="./js模块化历程 - 吕大豹 - 博客园_files/20160420115610.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/lvdabao/">吕大豹</a><br>
+            <a href="https://home.cnblogs.com/u/lvdabao/followees/">关注 - 24</a><br>
+            <a href="https://home.cnblogs.com/u/lvdabao/followers/">粉丝 - 1681</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;87114f06-25ab-e211-83e8-90b11c0b17d6&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(4865546,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">158</span>
+    </div>
+    <div class="buryit" onclick="votePost(4865546,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">1</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+    <div class="clear"></div>
+    <div id="post_next_prev">
+
+    <a href="https://www.cnblogs.com/lvdabao/p/mean-techstack-angular.html" class="p_n_p_prefix">« </a> 上一篇：    <a href="https://www.cnblogs.com/lvdabao/p/mean-techstack-angular.html" title="发布于 2015-09-08 23:31">用“MEAN”技术栈开发web应用（一）AngularJs前端架构</a>
+    <br>
+    <a href="https://www.cnblogs.com/lvdabao/p/mean-techstack-express.html" class="p_n_p_prefix">» </a> 下一篇：    <a href="https://www.cnblogs.com/lvdabao/p/mean-techstack-express.html" title="发布于 2015-11-13 17:22">用“MEAN”技术栈开发web应用（二）express搭建服务端框架</a>
+
+</div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2015-10-10 00:22</span>&nbsp;
+<a href="https://www.cnblogs.com/lvdabao/">吕大豹</a>&nbsp;
+阅读(<span id="post_view_count">21728</span>)&nbsp;
+评论(<span id="post_comment_count">77</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=4865546" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(4865546);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="./js模块化历程 - 吕大豹 - 博客园_files/highlight.min.js.下载"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 148826, cb_blogApp = 'lvdabao', cb_blogUserGuid = '87114f06-25ab-e211-83e8-90b11c0b17d6';
+    var cb_entryId = 4865546, cb_entryCreatedDate = '2015-10-10 00:22', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder">
+
+<div id="comment_pager_top">
+    
+    <div class="pager">
+        <!-- 上一页 -->
+        <a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#!comments" onclick="commentManager.renderComments(1, 50); return false;">
+            &lt; Prev
+        </a>
+
+        <!-- 第一页 -->
+        <a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#!comments" onclick="commentManager.renderComments(1, 50); return false;">
+            1
+        </a>
+
+        <!-- 前半部分页码 -->
+        
+
+        <!-- 当前页 -->
+        <span class="current">2</span>
+
+        <!-- 后半部分页码 -->
+
+        
+        <!-- 末尾页 -->
+        
+
+        <!-- 下一页 -->
+        
+    </div>
+</div>
+
+<br>
+<div class="feedback_area_title">评论列表</div>
+<div class="feedbackNoItems"><div class="feedbackNoItems"></div></div>	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3283531" class="layer">#51楼</a>
+<a name="3283531" id="comment_anchor_3283531"></a>
+[<span class="louzhu">楼主</span>]
+ 
+<span class="comment_date">2015-10-13 10:37</span>
+
+ 
+
+            <a id="a_comment_author_3283531" href="https://www.cnblogs.com/lvdabao/" target="_blank">吕大豹</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3283531" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3283403" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3283403);">@</a>
+自由飞<br>呵呵，其实也可以用辩证的眼光来看一下，灵活而简单的语言更能激发人们的创造力，所以生命力旺盛
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3283531, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3283531, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_3283531_avatar" style="display:none">
+            https://pic.cnblogs.com/face/520134/20160420115610.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3283714" class="layer">#52楼</a>
+<a name="3283714" id="comment_anchor_3283714"></a>
+
+ 
+<span class="comment_date">2015-10-13 14:09</span>
+
+ 
+
+            <a id="a_comment_author_3283714" href="https://www.cnblogs.com/XmodYgetZ/" target="_blank">xmodygetz</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3283714" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3283524" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3283524);">@</a>
+自由飞<br><fieldset class="comment_quote"><legend><a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3283524" title="查看引用原文">引用</a></legend>我看完之后的最鲜明的感觉：javascript这门语言得有多烂啊！</fieldset><br>实际上遇到这么多问题是由于javascript的成功所致。<br>由于javascript的成功，很多并非javascript传统领域的方面开始使用js，然后又推动了js的革新。<br><br>@吕大豹<br><fieldset class="comment_quote"><legend>引用</legend>@xmodygetz<br>seajs写的模块可以直接在nodejs中使用，只需安装seajs模块，然后在node中：<br>require('seajs');<br>var a = require('./a');<br>console.log(a.name);<br>但是nodejs下的模块是无法在浏览器中直接使用的，因为没有被“包装”起来，所以必须借助browserify等工具进行转换</fieldset><br>包装层是个很碍眼的东西，因为这些加载器本身就是为了包装，但是却需要作者做额外的兼容性包装。<br>@吕大豹<br><fieldset class="comment_quote"><legend>引用</legend>@xmodygetz<br>define(['a', 'b', 'c', 'd', 'e', 'f', 'g'], function(a, b, c, d, e, f, g){ ..... })<br>这种写法违背了commonjs中的“就近依赖”的风格，所以被一些人觉得不好。<br>所谓就近依赖就是在需要的时候在写require('a')，而不是在代码开头就一口气把所有的依赖写好。</fieldset><br>与其说是喜欢就近依赖，不如说是不喜欢回调嵌套。这种区别并不涉及本质。目前的这些方案都称不上完美。总觉得有一朵乌云遮蔽在程序之中。
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3283714, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3283714, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3284155" class="layer">#53楼</a>
+<a name="3284155" id="comment_anchor_3284155"></a>
+
+ 
+<span class="comment_date">2015-10-14 01:11</span>
+
+ 
+
+            <a id="a_comment_author_3284155" href="https://www.cnblogs.com/happycat1988/" target="_blank">happycat1988</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3284155" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    全部看完 貌似意思是说seajs最好是吧?<br>之前类似经历的话有个项目 一套项目2个环境跑 一个环境有外网 另一个环境只有内网 外网的话调用百度地图 内网的话只用自己的一套离线地图 外网连接不上的话要保证离线地图能用 异步加载百度地图的JS用的是插入script标签和$.Deferred结合的方式 百度地图和一些测距API之类的加载好之后更改界面到百度地图 现在想想 用seajs之类的就好了 自己写的挫爆了...........<br><br>去seajs那边网站看了一下 貌似要用工具打包什么的 nodejs东西没学过 这个打包是说压缩合并脚本之类的功能不? 我是做.NET的 是类似于Bundles的东西吗?
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3284155, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3284155, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_3284155_avatar" style="display:none">
+            https://pic.cnblogs.com/face/u364315.jpg?id=25013148
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3287342" class="layer">#54楼</a>
+<a name="3287342" id="comment_anchor_3287342"></a>
+
+ 
+<span class="comment_date">2015-10-19 10:27</span>
+
+ 
+
+            <a id="a_comment_author_3287342" href="https://www.cnblogs.com/afei9527/" target="_blank">有梦想的L先生</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3287342" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    码了
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3287342, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3287342, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_3287342_avatar" style="display:none">
+            https://pic.cnblogs.com/face/605683/20150922104915.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3287600" class="layer">#55楼</a>
+<a name="3287600" id="comment_anchor_3287600"></a>
+
+ 
+<span class="comment_date">2015-10-19 15:03</span>
+
+ 
+
+            <a id="a_comment_author_3287600" href="https://home.cnblogs.com/u/824628/" target="_blank">angela2015</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3287600" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    成都A轮互联网公司求前端工程师一枚，要求三年及以上相关工作经验，能独立负责前端开发工作。地址成都桐梓林地铁站，薪资9-20k，除此，还有10天带薪年假，美味午餐，弹性工作制，周末双休，五险一金，期权激励等等，有意请联系qq：373622523
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3287600, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3287600, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3295780" class="layer">#56楼</a>
+<a name="3295780" id="comment_anchor_3295780"></a>
+
+ 
+<span class="comment_date">2015-10-31 09:33</span>
+
+ 
+
+            <a id="a_comment_author_3295780" href="https://www.cnblogs.com/abapscript/" target="_blank">WangJerry</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3295780" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    学习了。
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3295780, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3295780, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_3295780_avatar" style="display:none">
+            https://pic.cnblogs.com/face/469608/20150531200737.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3314631" class="layer">#57楼</a>
+<a name="3314631" id="comment_anchor_3314631"></a>
+
+ 
+<span class="comment_date">2015-11-26 11:31</span>
+
+ 
+
+            <a id="a_comment_author_3314631" href="https://www.cnblogs.com/yanjialin/" target="_blank">天外小龙虾</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3314631" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    前 端 交 流 群 163270241
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3314631, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3314631, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_3314631_avatar" style="display:none">
+            https://pic.cnblogs.com/face/623781/20150916145600.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3457951" class="layer">#58楼</a>
+<a name="3457951" id="comment_anchor_3457951"></a>
+
+ 
+<span class="comment_date">2016-06-24 06:54</span>
+
+ 
+
+            <a id="a_comment_author_3457951" href="https://www.cnblogs.com/tomlxq/" target="_blank">tomLuo</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3457951" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    在requirejs2.0中，作者声明已经处理了此问题（<a href="https://github.com/jrburke/requirejs/wiki/Upgrading-to-RequireJS-2.0#delayed" target="_blank">https://github.com/jrburke/requirejs/wiki/Upgrading-to-RequireJS-2.0#delayed</a>）<br>但是我用2.1.20版测试的时候还是会预先执行<br>如何测试预先执行？<br>笔者有相关的demo吗？通过什么调试出来？
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3457951, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3457951, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3472500" class="layer">#59楼</a>
+<a name="3472500" id="comment_anchor_3472500"></a>
+
+ 
+<span class="comment_date">2016-07-19 11:27</span>
+
+ 
+
+            <a id="a_comment_author_3472500" href="https://home.cnblogs.com/u/846321/" target="_blank">candice2015</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3472500" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    模块化加载已经这么优化，还有必要做缓存处理吗？我们公司的移动端项目把所有模块合并到了一个文件内，这样做似乎不太好，但是，又不能找到更好的方法，期待楼主指点。移动端的架构是gulp + angular
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3472500, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3472500, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3472585" class="layer">#60楼</a>
+<a name="3472585" id="comment_anchor_3472585"></a>
+[<span class="louzhu">楼主</span>]
+ 
+<span class="comment_date">2016-07-19 13:31</span>
+
+ 
+
+            <a id="a_comment_author_3472585" href="https://www.cnblogs.com/lvdabao/" target="_blank">吕大豹</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3472585" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3472500" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3472500);">@</a>
+candice2015<br>不明白你说的缓存处理是指什么。资源的缓存浏览器会替你做。如果文件不大的话都合并成一个文件是可以的，但是如果合并后的文件有好几M，那就不合适了。需要分模块来合并。
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3472585, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3472585, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_3472585_avatar" style="display:none">
+            https://pic.cnblogs.com/face/520134/20160420115610.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3496834" class="layer">#61楼</a>
+<a name="3496834" id="comment_anchor_3496834"></a>
+
+ 
+<span class="comment_date">2016-08-25 21:25</span>
+
+ 
+
+            <a id="a_comment_author_3496834" href="https://www.cnblogs.com/leee/" target="_blank">李可在江湖</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3496834" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    好长啊，得慢慢看。哈哈
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3496834, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3496834, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_3496834_avatar" style="display:none">
+            https://pic.cnblogs.com/face/607624/20180607023119.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3613802" class="layer">#62楼</a>
+<a name="3613802" id="comment_anchor_3613802"></a>
+
+ 
+<span class="comment_date">2017-02-07 22:14</span>
+
+ 
+
+            <a id="a_comment_author_3613802" href="https://home.cnblogs.com/u/617089/" target="_blank">范特西</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3613802" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    博主，有个地方不是很明白，你在介绍require.JS时写的b.js是在点击后才开始加载然后执行，但是最后sea.js里面同样的也是把require('b')写在了点击事件里面，为什么这里的是进行了预加载？不应该是点击后再加载吗？
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3613802, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3613802, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3614025" class="layer">#63楼</a>
+<a name="3614025" id="comment_anchor_3614025"></a>
+[<span class="louzhu">楼主</span>]
+ 
+<span class="comment_date">2017-02-08 10:49</span>
+
+ 
+
+            <a id="a_comment_author_3614025" href="https://www.cnblogs.com/lvdabao/" target="_blank">吕大豹</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3614025" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3613802" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3613802);">@</a>
+范特西<br>seajs的特点是预加载，懒执行。写require('b')的时候开始执行模块b中的代码。<br>如果不预先加载，那么就不能用同步的方式来写代码了，你想想是不是。
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3614025, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3614025, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_3614025_avatar" style="display:none">
+            https://pic.cnblogs.com/face/520134/20160420115610.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3614038" class="layer">#64楼</a>
+<a name="3614038" id="comment_anchor_3614038"></a>
+
+ 
+<span class="comment_date">2017-02-08 10:57</span>
+
+ 
+
+            <a id="a_comment_author_3614038" href="https://home.cnblogs.com/u/617089/" target="_blank">范特西</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3614038" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3614025" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3614025);">@</a>
+吕大豹<br>但是我的迷惑是我不懂sea.js是如何做到不点击触发那个事件就去加载b.js的？是里面的tostring方法匹配到的？如果是那为什么require.js不是也有tostring去匹配它为何没匹配到并下载？请你大概说下
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3614038, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3614038, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3614069" class="layer">#65楼</a>
+<a name="3614069" id="comment_anchor_3614069"></a>
+[<span class="louzhu">楼主</span>]
+ 
+<span class="comment_date">2017-02-08 11:27</span>
+
+ 
+
+            <a id="a_comment_author_3614069" href="https://www.cnblogs.com/lvdabao/" target="_blank">吕大豹</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3614069" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3614038" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3614038);">@</a>
+范特西<br>seajs确实是用正则匹配，拿到依赖的模块，预先加载的。<br>requirejs没这么干是他的设计思想不是这个，他就是要异步加载。不过requirejs在后续的版本中，也支持了同步的写法了。就是上面提到的Simplified CommonJS wrapping
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3614069, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3614069, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_3614069_avatar" style="display:none">
+            https://pic.cnblogs.com/face/520134/20160420115610.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3614159" class="layer">#66楼</a>
+<a name="3614159" id="comment_anchor_3614159"></a>
+
+ 
+<span class="comment_date">2017-02-08 13:35</span>
+
+ 
+
+            <a id="a_comment_author_3614159" href="https://home.cnblogs.com/u/617089/" target="_blank">范特西</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3614159" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3614069" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3614069);">@</a>
+吕大豹<br>那那个点击事件对他有影响对sea.js无影响？还是看代码吧<br><br><br><div class="cnblogs_Highlighter sh-gutter"><div><div id="highlighter_800028" class="syntaxhighlighter  javascript"><div class="toolbar"><span><a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div><div class="line number24 index23 alt1">24</div><div class="line number25 index24 alt2">25</div><div class="line number26 index25 alt1">26</div><div class="line number27 index26 alt2">27</div><div class="line number28 index27 alt1">28</div><div class="line number29 index28 alt2">29</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="javascript plain">require.js那部分的代码</code></div><div class="line number2 index1 alt1"><code class="javascript plain">define(</code><code class="javascript keyword">function</code><code class="javascript plain">(){</code></div><div class="line number3 index2 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">console.log(</code><code class="javascript string">'main2.js执行'</code><code class="javascript plain">);</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">require([</code><code class="javascript string">'a'</code><code class="javascript plain">], </code><code class="javascript keyword">function</code><code class="javascript plain">(a){</code></div><div class="line number6 index5 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">a.hello();&nbsp;&nbsp;&nbsp; </code></div><div class="line number7 index6 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">});</code></div><div class="line number8 index7 alt1">&nbsp;</div><div class="line number9 index8 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">$(</code><code class="javascript string">'#b'</code><code class="javascript plain">).click(</code><code class="javascript keyword">function</code><code class="javascript plain">(){</code></div><div class="line number10 index9 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">require([</code><code class="javascript string">'b'</code><code class="javascript plain">], </code><code class="javascript keyword">function</code><code class="javascript plain">(b){</code></div><div class="line number11 index10 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">b.hello();</code></div><div class="line number12 index11 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">});</code></div><div class="line number13 index12 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">});</code></div><div class="line number14 index13 alt1"><code class="javascript plain">});</code></div><div class="line number15 index14 alt2"><code class="javascript plain">这里你说点击后才会加载b.js，那么这里有没有发生factory的的字符串正则匹配？我觉得是发生了因为没有写依赖数组，那么既然匹配了又是如何做到不去加载b.js而只加载a.js的？如果说是因为点击事件还没触发那么为什么sea.js在点击事件还没触发时就能加载b.js？请看下面sea.js的代码</code></div><div class="line number16 index15 alt1"><code class="javascript comments">//main.js</code></div><div class="line number17 index16 alt2"><code class="javascript plain">define(</code><code class="javascript keyword">function</code><code class="javascript plain">(require, exports, module){</code></div><div class="line number18 index17 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">console.log(</code><code class="javascript string">'main.js执行'</code><code class="javascript plain">);</code></div><div class="line number19 index18 alt2">&nbsp;</div><div class="line number20 index19 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">var</code> <code class="javascript plain">a = require(</code><code class="javascript string">'a'</code><code class="javascript plain">);</code></div><div class="line number21 index20 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">a.hello();&nbsp;&nbsp;&nbsp; </code></div><div class="line number22 index21 alt1">&nbsp;</div><div class="line number23 index22 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">$(</code><code class="javascript string">'#b'</code><code class="javascript plain">).click(</code><code class="javascript keyword">function</code><code class="javascript plain">(){</code></div><div class="line number24 index23 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">var</code> <code class="javascript plain">b = require(</code><code class="javascript string">'b'</code><code class="javascript plain">);</code></div><div class="line number25 index24 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">b.hello();</code></div><div class="line number26 index25 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">});</code></div><div class="line number27 index26 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number28 index27 alt1"><code class="javascript plain">});</code></div><div class="line number29 index28 alt2"><code class="javascript plain">这里你说是预加载了a.js和b.js，按照你说的sea.js用到了正则匹配，匹配到了require(</code><code class="javascript string">'a'</code><code class="javascript plain">)和require(</code><code class="javascript string">'b'</code><code class="javascript plain">)那么它匹配到后直接开始加载a.js和b.js了，它忽略了require(</code><code class="javascript string">'b'</code><code class="javascript plain">)是写在点击事件里面吗？没有点击程序就执行到那里了？</code></div></div></td></tr></tbody></table></div></div></div>
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3614159, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3614159, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3614187" class="layer">#67楼</a>
+<a name="3614187" id="comment_anchor_3614187"></a>
+[<span class="louzhu">楼主</span>]
+ 
+<span class="comment_date">2017-02-08 14:10</span>
+
+ 
+
+            <a id="a_comment_author_3614187" href="https://www.cnblogs.com/lvdabao/" target="_blank">吕大豹</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3614187" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3614159" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3614159);">@</a>
+范特西<br>你看我文章中的解释，requirejs只有使用了Simplified CommonJS wrapping规范的书写方式，才会进行预先匹配和加载。<br>用AMD的原有规范写的，即在数组中声明依赖，在回调函数中进行处理。这种是不会进行匹配的。
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3614187, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3614187, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_3614187_avatar" style="display:none">
+            https://pic.cnblogs.com/face/520134/20160420115610.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3614252" class="layer">#68楼</a>
+<a name="3614252" id="comment_anchor_3614252"></a>
+
+ 
+<span class="comment_date">2017-02-08 15:10</span>
+
+ 
+
+            <a id="a_comment_author_3614252" href="https://home.cnblogs.com/u/617089/" target="_blank">范特西</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3614252" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3614187" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3614187);">@</a>
+吕大豹<br>噢原来是这样，也就是我问题中代码里面的的require.js那种写法不会进行预先匹配，而sea.js中的写法是符合Simplified CommonJS wrapping规范的所以会用正则去匹配，这点明白了，非常感谢大神的解惑！
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3614252, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3614252, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3614260" class="layer">#69楼</a>
+<a name="3614260" id="comment_anchor_3614260"></a>
+[<span class="louzhu">楼主</span>]
+ 
+<span class="comment_date">2017-02-08 15:20</span>
+
+ 
+
+            <a id="a_comment_author_3614260" href="https://www.cnblogs.com/lvdabao/" target="_blank">吕大豹</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3614260" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3614252" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3614252);">@</a>
+范特西<br>恩，补充下，<br>Simplified CommonJS wrapping是AMD规范中自己起的名字。不能用其去解释seajs。<br>seajs的行为要用CMD规范去解释。
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3614260, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3614260, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_3614260_avatar" style="display:none">
+            https://pic.cnblogs.com/face/520134/20160420115610.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3614330" class="layer">#70楼</a>
+<a name="3614330" id="comment_anchor_3614330"></a>
+
+ 
+<span class="comment_date">2017-02-08 16:21</span>
+
+ 
+
+            <a id="a_comment_author_3614330" href="https://home.cnblogs.com/u/617089/" target="_blank">范特西</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3614330" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3614260" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3614260);">@</a>
+吕大豹<br>哦，谢谢纠正，我问下，<div class="cnblogs_Highlighter sh-gutter"><div><div id="highlighter_184917" class="syntaxhighlighter  javascript"><div class="toolbar"><span><a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="javascript plain">require.js那部分的代码</code></div><div class="line number2 index1 alt1"><code class="javascript plain">define(</code><code class="javascript keyword">function</code><code class="javascript plain">(){</code></div><div class="line number3 index2 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">console.log(</code><code class="javascript string">'main2.js执行'</code><code class="javascript plain">);</code></div><div class="line number4 index3 alt1"><code class="javascript spaces">&nbsp;</code>&nbsp;</div><div class="line number5 index4 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">require([</code><code class="javascript string">'a'</code><code class="javascript plain">], </code><code class="javascript keyword">function</code><code class="javascript plain">(a){</code></div><div class="line number6 index5 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">a.hello();&nbsp;&nbsp; </code></div><div class="line number7 index6 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">});</code></div><div class="line number8 index7 alt1"><code class="javascript spaces">&nbsp;</code>&nbsp;</div><div class="line number9 index8 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">$(</code><code class="javascript string">'#b'</code><code class="javascript plain">).click(</code><code class="javascript keyword">function</code><code class="javascript plain">(){</code></div><div class="line number10 index9 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">require([</code><code class="javascript string">'b'</code><code class="javascript plain">], </code><code class="javascript keyword">function</code><code class="javascript plain">(b){</code></div><div class="line number11 index10 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">b.hello();</code></div><div class="line number12 index11 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">});</code></div><div class="line number13 index12 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">});</code></div><div class="line number14 index13 alt1"><code class="javascript plain">});</code></div><div class="line number15 index14 alt2"><code class="javascript plain">你这种写法算不算Simplifited CommonJS wrapping?你的也没有写依赖数组啊，但区别就是正规的Simplifited CommonJS wrapping写法是还要再factory函数里面写参数</code><code class="javascript keyword">function</code><code class="javascript plain">(require,exports,module){},你的是空的，我开始以为这样也是Simplifited CommonJS wrapping，然后就会预下载了。</code></div></div></td></tr></tbody></table></div></div></div>
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3614330, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3614330, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3614339" class="layer">#71楼</a>
+<a name="3614339" id="comment_anchor_3614339"></a>
+[<span class="louzhu">楼主</span>]
+ 
+<span class="comment_date">2017-02-08 16:26</span>
+
+ 
+
+            <a id="a_comment_author_3614339" href="https://www.cnblogs.com/lvdabao/" target="_blank">吕大豹</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3614339" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3614330" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3614330);">@</a>
+范特西<br>当然不算了。要按规范来，规范说什么就是什么。
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3614339, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3614339, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_3614339_avatar" style="display:none">
+            https://pic.cnblogs.com/face/520134/20160420115610.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3614342" class="layer">#72楼</a>
+<a name="3614342" id="comment_anchor_3614342"></a>
+
+ 
+<span class="comment_date">2017-02-08 16:28</span>
+
+ 
+
+            <a id="a_comment_author_3614342" href="https://home.cnblogs.com/u/617089/" target="_blank">范特西</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3614342" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3614339" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3614339);">@</a>
+吕大豹<br>恩那我就大概懂了，灰常感谢！
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3614342, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3614342, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3809655" class="layer">#73楼</a>
+<a name="3809655" id="comment_anchor_3809655"></a>
+
+ 
+<span class="comment_date">2017-10-13 15:32</span>
+
+ 
+
+            <a id="a_comment_author_3809655" href="https://www.cnblogs.com/lessfish/" target="_blank">lessfish</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3809655" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    好文章，学习了，原来 AMD 是 commonjs 衍生的
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3809655, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3809655, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_3809655_avatar" style="display:none">
+            https://pic.cnblogs.com/face/675542/20190427005154.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3993416" class="layer">#74楼</a>
+<a name="3993416" id="comment_anchor_3993416"></a>
+
+ 
+<span class="comment_date">2018-06-07 18:56</span>
+
+ 
+
+            <a id="a_comment_author_3993416" href="https://www.cnblogs.com/bonly-ge/" target="_blank">bonly-ge</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3993416" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    你好 我想请教一下，那个复制按钮是怎么添加上的 啊？我都查了两天也没找到，我也想给我的博客上加上复制按钮
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3993416, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3993416, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_3993416_avatar" style="display:none">
+            https://pic.cnblogs.com/face/1139620/20170404000249.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3994037" class="layer">#75楼</a>
+<a name="3994037" id="comment_anchor_3994037"></a>
+[<span class="louzhu">楼主</span>]
+ 
+<span class="comment_date">2018-06-08 13:01</span>
+
+ 
+
+            <a id="a_comment_author_3994037" href="https://www.cnblogs.com/lvdabao/" target="_blank">吕大豹</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3994037" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3993416" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3993416);">@</a>
+bonly-ge<br>博客园后台编辑器，插入代码
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3994037, &#39;Digg&#39;, this.parentElement, false);">
+                支持(1)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3994037, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_3994037_avatar" style="display:none">
+            https://pic.cnblogs.com/face/520134/20160420115610.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3994091" class="layer">#76楼</a>
+<a name="3994091" id="comment_anchor_3994091"></a>
+
+ 
+<span class="comment_date">2018-06-08 14:03</span>
+
+ 
+
+            <a id="a_comment_author_3994091" href="https://www.cnblogs.com/bonly-ge/" target="_blank">bonly-ge</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3994091" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#3994037" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3994037);">@</a>
+吕大豹<br>非常感谢您的回复，我是用的Markdown编辑器，没有插入代码的功能，你是用的那个编辑器写博客呢？请指教，这是我的博客<a href="http://www.cnblogs.com/bonly-ge/" target="_blank">http://www.cnblogs.com/bonly-ge/</a>
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3994091, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3994091, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_3994091_avatar" style="display:none">
+            https://pic.cnblogs.com/face/1139620/20170404000249.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#4131192" class="layer">#77楼</a>
+<a name="4131192" id="comment_anchor_4131192"></a>
+
+        <span id="comment-maxId" style="display:none">4131192</span>
+        <span id="comment-maxDate" style="display:none">2018/12/4 下午2:42:02</span>
+ 
+<span class="comment_date">2018-12-04 14:42</span>
+
+ 
+
+            <a id="a_comment_author_4131192" href="https://www.cnblogs.com/tulpen/" target="_blank">昨日的世界</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4131192" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    好流弊！连我这个不懂前端的人也看懂了，佩服！
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4131192, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4131192, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_4131192_avatar" style="display:none">
+            https://pic.cnblogs.com/face/776612/20180408162248.png
+        </span>
+
+			</div>
+		</div>
+
+<div id="comment_pager_bottom">
+    
+    <div class="pager">
+        <!-- 上一页 -->
+        <a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#!comments" onclick="commentManager.renderComments(1, 50); return false;">
+            &lt; Prev
+        </a>
+
+        <!-- 第一页 -->
+        <a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#!comments" onclick="commentManager.renderComments(1, 50); return false;">
+            1
+        </a>
+
+        <!-- 前半部分页码 -->
+        
+
+        <!-- 当前页 -->
+        <span class="current">2</span>
+
+        <!-- 后半部分页码 -->
+
+        
+        <!-- 末尾页 -->
+        
+
+        <!-- 下一页 -->
+        
+    </div>
+</div>
+
+
+</div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html#top">返回顶部</a></div>
+    <div id="comment_form_container" style="visibility: visible;"><div class="login_tips">
+    注册用户登录后才能发表评论，请 
+    <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a>
+     或 
+    <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，
+    <a href="https://www.cnblogs.com/">访问</a> 网站首页。
+</div></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-ucancode&#39;)">【推荐】超50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="https://cloud.tencent.com/act/seckill?fromSource=gwzcw.3498755.3498755.3498755&amp;utm_medium=cpc&amp;utm_id=gwzcw.3498755.3498755.3498755" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-腾讯云&#39;)">【推荐】腾讯云产品限时秒杀，爆款1核2G云服务器99元/年！</a><br></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="./js模块化历程 - 吕大豹 - 博客园_files/gpt.js.下载"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;" data-google-query-id="CNzFyt7x0ugCFdBiYAod6AsBoQ"><div id="google_ads_iframe_/1090369/C1_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/C1_0" title="3rd party ad content" name="google_ads_iframe_/1090369/C1_0" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border: 0px; vertical-align: bottom;" data-google-container-id="1" data-load-complete="true" src="./js模块化历程 - 吕大豹 - 博客园_files/saved_resource.html"></iframe></div></div>
+    </div>
+    <div id="under_post_news"><div class="recomm-block"><b>相关博文：</b><br>·  <a title="JS模块化历程" href="https://www.cnblogs.com/raincha/p/4896057.html" target="_blank" onclick="clickRecomItmem(4896057)">JS模块化历程</a><br>·  <a title="模块化开发" href="https://www.cnblogs.com/xuejiangjun/p/4987072.html" target="_blank" onclick="clickRecomItmem(4987072)">模块化开发</a><br>·  <a title="前端-模块化" href="https://www.cnblogs.com/zmx-xiao-xiao/p/7669515.html" target="_blank" onclick="clickRecomItmem(7669515)">前端-模块化</a><br>·  <a title="js模块化开发--AMD--CMD" href="https://www.cnblogs.com/zhaokai021/p/4564313.html" target="_blank" onclick="clickRecomItmem(4564313)">js模块化开发--AMD--CMD</a><br>·  <a title="js模块化历程" href="https://www.cnblogs.com/daysme/p/6898529.html" target="_blank" onclick="clickRecomItmem(6898529)">js模块化历程</a><br>»  <a target="_blank" href="https://recomm.cnblogs.com/blogpost/4865546">更多推荐...</a></div></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;" data-google-query-id="CPbfy97x0ugCFdBiYAod6AsBoQ">
+            
+        <div id="google_ads_iframe_/1090369/C2_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/C2_0" title="3rd party ad content" name="google_ads_iframe_/1090369/C2_0" width="468" height="60" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border: 0px; vertical-align: bottom;" data-google-container-id="2" data-load-complete="true" src="./js模块化历程 - 吕大豹 - 博客园_files/saved_resource(1).html"></iframe></div></div>
+    </div>
+    <div id="under_post_kb">
+<div class="itnews c_ad_block">
+    <b>最新 IT 新闻</b>:
+    <br>
+ ·              <a href="https://news.cnblogs.com/n/659147/" target="_blank">新突破：一次抽血可识别 50 多种癌症，误检率不到 1%</a>
+            <br>
+ ·              <a href="https://news.cnblogs.com/n/659125/" target="_blank">瑞幸财务造假22亿，为什么它不能好好卖咖啡？</a>
+            <br>
+ ·              <a href="https://news.cnblogs.com/n/659145/" target="_blank">特斯拉交付量和产量让多头“松了口气” 中国制造与需求开始反弹</a>
+            <br>
+ ·              <a href="https://news.cnblogs.com/n/659144/" target="_blank">在健康与维持生计之间挣扎 亚马逊司机担心3天感染了1000人</a>
+            <br>
+ ·              <a href="https://news.cnblogs.com/n/659143/" target="_blank">Eclipse 基金会推出 Visual Studio Code 的替代 Eclipse Theia</a>
+            <br>
+    » <a href="https://news.cnblogs.com/" title="IT 新闻" target="_blank">更多新闻...</a>
+</div></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem"><!--done-->
+<h3 class="catListTitle">公告</h3>
+
+<div id="blog-news">
+    <div style="width:90%; line-height:20px;">我的小密圈，发布大量前端/工作/个人经验，提供模拟面试。</div>
+<img style="width:90%;" src="./js模块化历程 - 吕大豹 - 博客园_files/o_D412C37E-ED58-4ABA-B109-43EA9BC043C5.png">
+
+<br><br>
+
+<div style="width:90%; line-height:20px;">我的微信公众号，写点技术之外的文章，扫描关注，认识另一个我</div>
+<img style="width:90%;" src="./js模块化历程 - 吕大豹 - 博客园_files/o_qrcode_for_gh_2a5545172c9e_430.jpg">
+<div class="copyright">
+<b>版权声明：</b>本博客原创文章使用<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/cn/" target="_blank">CC3.0授权协议</a>，署名-非商业性使用-禁止演绎。转载本博客文章须在开头位置著名原作者姓名以及原文链接，违反协议的转载将受到我本人的版权追责。
+</div>
+    <div id="profile_block">
+        昵称：
+        <a href="https://home.cnblogs.com/u/lvdabao/">
+            吕大豹
+        </a>
+        <br>
+        园龄：
+        <a href="https://home.cnblogs.com/u/lvdabao/" title="入园时间：2013-04-22">
+            6年11个月
+        </a>
+        <br>
+        粉丝：
+        <a href="https://home.cnblogs.com/u/lvdabao/followers/">
+            1681
+        </a>
+        <br>
+        关注：
+        <a href="https://home.cnblogs.com/u/lvdabao/followees/">
+            24
+        </a>
+        <div id="p_b_follow">
+<a href="javascript:void(0)" onclick="follow(&#39;87114f06-25ab-e211-83e8-90b11c0b17d6&#39;)">+加关注</a></div>
+        <script>getFollowStatus('87114f06-25ab-e211-83e8-90b11c0b17d6');</script>
+    </div>
+</div>
+
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn">
+<!-- 搜索 -->
+<div id="sidebar_search" class="sidebar-block">
+    <div id="sidebar_search" class="mySearch">
+        <h3 class="catListTitle">搜索</h3>
+        <div id="sidebar_search_box">
+            <div id="widget_my_zzk" class="div_my_zzk">
+                <input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk">
+            </div>
+            <div id="widget_my_google" class="div_my_zzk">
+                <input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 常用链接 -->
+
+
+<!-- 最新随笔 -->
+<div id="sidebar_recentposts" class="sidebar-block">
+    <div class="catListEssay">
+<h3 class="catListTitle">最新随笔</h3>
+<ul>
+                <li>
+                    
+
+<a href="https://www.cnblogs.com/lvdabao/p/12396949.html">1.web资源预加载-生产环境实践</a>
+
+                </li>
+                <li>
+                    
+
+<a href="https://www.cnblogs.com/lvdabao/p/12142637.html">2.2019年终总结——三十而立</a>
+
+                </li>
+                <li>
+                    
+
+<a href="https://www.cnblogs.com/lvdabao/p/11934846.html">3.从eslint规则学点JavaScript知识</a>
+
+                </li>
+                <li>
+                    
+
+<a href="https://www.cnblogs.com/lvdabao/p/11920919.html">4.一种前端灰度发布方案</a>
+
+                </li>
+                <li>
+                    
+
+<a href="https://www.cnblogs.com/lvdabao/p/10211898.html">5.2018年终总结——越过山丘</a>
+
+                </li>
+                <li>
+                    
+
+<a href="https://www.cnblogs.com/lvdabao/p/8573778.html">6.记录一个前端bug的解决过程</a>
+
+                </li>
+                <li>
+                    
+
+<a href="https://www.cnblogs.com/lvdabao/p/8258025.html">7.2017年终总结——恍恍惚惚又一年</a>
+
+                </li>
+                <li>
+                    
+
+<a href="https://www.cnblogs.com/lvdabao/p/7989238.html">8.理解defineProperty以及getter、setter</a>
+
+                </li>
+                <li>
+                    
+
+<a href="https://www.cnblogs.com/lvdabao/p/7771763.html">9.记一次前端性能优化的案例</a>
+
+                </li>
+                <li>
+                    
+
+<a href="https://www.cnblogs.com/lvdabao/p/7338353.html">10.移动端踩坑合集</a>
+
+                </li>
+			
+
+</ul>
+</div>
+
+
+</div>
+
+
+<!-- 我的标签 -->
+<div id="sidebar_toptags" class="sidebar-block">
+    <div class="catListTag">
+<h3 class="catListTitle">我的标签</h3>
+<ul>
+
+        <li>
+            <a href="https://www.cnblogs.com/lvdabao/tag/AngularJs/">AngularJs</a>(14)
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/lvdabao/tag/jquery%E6%8F%92%E4%BB%B6/">jquery插件</a>(8)
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/lvdabao/tag/javascript/">javascript</a>(7)
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/lvdabao/tag/HTML5%E4%B8%8ECSS3/">HTML5与CSS3</a>(4)
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/lvdabao/tag/css/">css</a>(2)
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/lvdabao/tag/webpack/">webpack</a>(2)
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/lvdabao/tag/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%80%A7/">浏览器兼容性</a>(1)
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/lvdabao/tag/%E5%93%8D%E5%BA%94%E5%BC%8Fweb%E8%AE%BE%E8%AE%A1/">响应式web设计</a>(1)
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/lvdabao/tag/express/">express</a>(1)
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/lvdabao/tag/iframe%E6%BB%9A%E5%8A%A8%E6%9D%A1/">iframe滚动条</a>(1)
+        </li>
+    <li>
+        <a href="https://www.cnblogs.com/lvdabao/tag/">更多</a>
+    </li>
+
+</ul>
+</div>
+
+
+</div>
+
+<!-- 积分与排名 -->
+
+
+<!-- 随笔分类、随笔档案、文章分类、新闻分类、相册、链接 -->
+<div id="sidebar_categories">
+    
+        <div id="sidebar_postcategory" class="catListPostCategory sidebar-block">
+            <h3 class="catListTitle">
+                
+
+随笔分类
+
+
+
+            </h3>
+
+
+            <ul>
+
+                        <li>
+                            
+<a href="https://www.cnblogs.com/lvdabao/category/536799.html" rel="" target="">
+    css相关(13)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/lvdabao/category/536798.html" rel="" target="">
+    javascript相关(61)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/lvdabao/category/514498.html" rel="" target="">
+    畅想与杂谈(25)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/lvdabao/category/481504.html" rel="" target="">
+    读书笔记(5)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/lvdabao/category/818336.html" rel="" target="">
+    前端架构(3)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/lvdabao/category/536801.html" rel="" target="">
+    前端面试题(5)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/lvdabao/category/473200.html" rel="" target="">
+    问题解决记录(9)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/lvdabao/category/536813.html" rel="" target="">
+    我要分享(9)
+</a>
+ 
+
+                        </li>
+
+            </ul>
+
+
+        </div>
+
+</div>
+
+<!-- 最新评论 -->
+<div id="sidebar_recentcomments" class="sidebar-block">
+    <div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+
+	<div class="RecentCommentBlock">
+        <ul>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/lvdabao/p/es6-promise-1.html">1. Re:大白话讲解Promise（一）</a></li>
+                    <li class="recent_comment_body">@宁南 谢谢...</li>
+                    <li class="recent_comment_author">--吕大豹</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/lvdabao/p/es6-promise-1.html">2. Re:大白话讲解Promise（一）</a></li>
+                    <li class="recent_comment_body"><p>写的非常好，我看了那么多讲解Promise的文章，就这个通俗易懂</p>
+</li>
+                    <li class="recent_comment_author">--宁南</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/lvdabao/p/11920919.html">3. Re:一种前端灰度发布方案</a></li>
+                    <li class="recent_comment_body">@ 梵高先生不姓梵可以的...</li>
+                    <li class="recent_comment_author">--吕大豹</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/lvdabao/p/11920919.html">4. Re:一种前端灰度发布方案</a></li>
+                    <li class="recent_comment_body">你好 可以转载吗  会注明作者和来源</li>
+                    <li class="recent_comment_author">--梵高先生不姓梵</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/lvdabao/p/3534943.html">5. Re:HTML5文件上传插件 Huploadify V2.1发布</a></li>
+                    <li class="recent_comment_body">大牛你好，我想知道怎么动态传参？ $('#file_upload').Huploadify({ auto:true, fileSizeLimit:9999, uploader:window.baseU...</li>
+                    <li class="recent_comment_author">--轻歌一曲舞莲华</li>
+        </ul>
+    </div>
+</div>
+
+
+</div>
+
+
+
+<!-- 阅读排行榜 -->
+<div id="sidebar_topviewedposts" class="sidebar-block">
+    <div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock">
+        <ul style="word-break:break-all">
+                    <li>
+                        <a href="https://www.cnblogs.com/lvdabao/p/es6-promise-1.html">
+                            1. 大白话讲解Promise（一）(189513)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/lvdabao/p/3475426.html">
+                            2. 走进AngularJs(七) 过滤器（filter）(67482)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/lvdabao/p/4204858.html">
+                            3. 一个简单粗暴的前后端分离方案(55497)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/lvdabao/p/jquery-deferred.html">
+                            4. 大白话讲解Promise（三）搞懂jquery中的Promise(48427)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/lvdabao/p/4253704.html">
+                            5. 页面动态加入&lt;script&gt;标签并执行代码(46232)
+                        </a>
+                    </li>
+        </ul>
+    </div>
+</div>
+
+
+</div>
+
+<!-- 评论排行榜 -->
+<div id="sidebar_topcommentedposts" class="sidebar-block">
+    <div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock">
+        <ul style="word-break:break-all">
+                    <li>
+                        <a href="https://www.cnblogs.com/lvdabao/p/3534943.html">
+                            1. HTML5文件上传插件 Huploadify V2.1发布(99)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/lvdabao/p/es6-promise-1.html">
+                            2. 大白话讲解Promise（一）(92)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/lvdabao/p/5212536.html">
+                            3. 你get了无数技能，为什么一事无成(82)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/lvdabao/p/3660707.html">
+                            4. 年后跳槽那点事：乐视+金山+360面试之行(82)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html">
+                            5. js模块化历程(77)
+                        </a>
+                    </li>
+        </ul>
+    </div>
+</div>
+
+
+</div>
+
+<!-- 推荐排行榜 -->
+<div id="sidebar_topdiggedposts" class="sidebar-block">
+    
+<div id="topdigg_posts_wrap">
+    <div class="catListView">
+        <h3 class="catListTitle">推荐排行榜</h3>
+        <div id="TopDiggPostsBlock">
+            <ul style="word-break: break-all">
+                        <li>
+                            <a href="https://www.cnblogs.com/lvdabao/p/es6-promise-1.html">
+                                1. 大白话讲解Promise（一）(358)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/lvdabao/p/5212536.html">
+                                2. 你get了无数技能，为什么一事无成(223)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/lvdabao/p/js-modules-develop.html">
+                                3. js模块化历程(158)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/lvdabao/p/AngularJs.html">
+                                4. 走进AngularJs(一)angular基本概念的认识与实战(103)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/lvdabao/p/4280518.html">
+                                5. 一行神奇的javascript代码(87)
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright © 2020 吕大豹
+<br><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <div class="cnzzstatic" style="text-align:center;z-index: 1000;position: absolute;right: 0;background-color: transparent;">
+<script src="./js模块化历程 - 吕大豹 - 博客园_files/stat.php" language="JavaScript"></script><script src="./js模块化历程 - 吕大豹 - 博客园_files/core.php" charset="utf-8" type="text/javascript"></script><script src="./js模块化历程 - 吕大豹 - 博客园_files/online_v3.php" charset="utf-8" type="text/javascript"></script><a href="https://www.cnzz.com/stat/website.php?web_id=5597968" target="_blank">站长统计</a><a href="https://www.cnzz.com/stat/website.php?web_id=5597968" target="_blank"> |  今日IP[33] | 今日PV[45] | 昨日IP[120] |  昨日PV[168] | </a><a href="https://www.cnzz.com/stat/website.php?web_id=5597968&amp;method=online" target="_blank">当前在线[0]</a>
+</div>
+    </div><script type="text/javascript">
+var content = 'width=device-width, initial-scale=1 user-scalable=no';
+var viewport = document.createElement('meta');
+viewport.setAttribute('name', 'viewport');
+viewport.setAttribute('content', content);
+document.head.appendChild( viewport );
+</script>
+
+</body></html>

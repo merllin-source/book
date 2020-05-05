@@ -1,0 +1,125 @@
+#topics .postTitle, .postTitle{height:auto;margin-top:12px;width:100%;margin-bottom: 10px !important;}
+#blogTitle h1{margin: 8px 0 0 8px;}
+#blogTitle h2{clear: left;margin: 6px 0 0 8px;}
+.postTitle a,#topics .postTitle a{color:#056276;}
+.postBody{font-family:Microsoft Yahei; line-height:1.8em; font-size:16px;}
+.postDesc{margin-top:20px;}
+#header{width:90%;height:210px;}
+#main{width:90%;}
+#topics .postTitle a{font-size:22px;}
+#blogTitle{top:50px;left:50px;}
+#navigator{top:50px;left:50px;}
+.blogStats{margin-right:350px;}
+.postCon a,.postBody a{color:#AB622B;}
+.postCon,.postBody{color:#333;}
+
+#mainContent{width:75%;}
+#sideBar{width:20%;}
+#mainContent .forFlow,#topics,#sideBarMain,#sideBarMain .newsItem,#sideBarMain .catListTitle,#leftcontentcontainer,.catListComment,.catListTitle,.postCon{width:100%;}
+#mainContent .postBody{width:98%;}
+#sideBarMain ul,#mainContent .day{width:96%;line-height:1.5em;}
+.c_b_p_desc{line-height:1.8em;}
+
+
+#blogTitle h1,#blogTitle h2{display:inline-block}
+img,table, #cnblogs_post_body img{max-width:100%;}
+.louzhu{color:#B24020;}
+.feedbackCon{width:94%;color:#333;}
+.feedbackListSubtitle,.feedbackListSubtitle a{color:#666;}
+
+#ad_under_post_holder #google_ad_c1,#google_ad_c2{ display:none !important;}
+#scrollUp {
+ bottom: 20px;
+ right: 20px; 
+ width: 38px;
+ height: 38px;
+ background: url(https://raw.github.com/markgoodyear/scrollup/master/img/top.png) no-repeat;
+}
+#div_digg{
+position: fixed;
+top: 500px;
+right: 25%;
+border: 3px dotted lightblue;
+z-index:2;
+}
+.topicListFooter{margin-top:10px}
+.topicListFooter a:link{font-size:18px;color:#056276;font-weight:600;}
+#footer{width: 100%;}
+.postBody{margin-top: 50px;}
+#topics .postDesc{position:absolute !important; top: 60px;}
+.copyright{padding-right:20px;margin-bottom:12px;line-height:18px;}
+.copyright a{color: #056276; text-decoration:underline;}
+#cnblogs_post_body p{margin:18px 0;}
+
+@media screen and (max-width: 1000px){
+    #main, #mainContent{
+        width: 100%;
+    }
+    #sideBar, body > a, #navList, #navigator, .postDesc a, #homepage_top_pager, .cnzzstatic, .login_tips, .ad_text_commentbox, #under_post_news, .c_ad_block, #under_post_kb, #ad_t2, #div_digg{
+        display: none;
+    }
+    #blogTitle a{
+        font-size: 30px;
+    }
+    #blogTitle h2{
+        font-size: 16px;
+    }
+    #header{
+        height: 180px;
+    }
+    #home{
+        background-image: none;
+    }
+    .postTitle a{
+        font-size: 22px;
+    }
+    .postCon, .postCon a{
+        font-size: 16px;
+    }
+    .day{
+        margin: 0 2%;
+    }
+    .postCon a{
+        padding-left: 0;
+    }
+    .postDesc{
+        width: 100%;
+        font-size: 12px;
+    }
+    #home{
+        background-color: #68BCCA;
+    }
+    #mainContent .forFlow{
+        margin: 4px 0 0 0;
+    }
+    .postBody{
+        
+    }
+    #blogTitle{
+        left: 0;
+    }
+    #mainContent .postBody{
+        width: 100%;
+    }
+    .post{
+        padding: 0 4%;
+    }
+    #header{
+        background: url(https://images.cnblogs.com/cnblogs_com/lvdabao/507840/o_face-monkey-128.png) top right no-repeat;
+        background-size: 46px;
+    }
+    .topicListFooter{
+        width: 100%;
+        text-align: center;
+        padding: 0;
+        height: 40px;
+    }
+    .topicListFooter a:link{
+        font-size: 12px;
+    }
+    .feedbackCon{
+        width: 88%;
+        line-height:20px;
+    }
+}
+.cnblogshidden{display:none;}

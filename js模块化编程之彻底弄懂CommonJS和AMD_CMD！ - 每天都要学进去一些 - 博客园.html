@@ -1,0 +1,2275 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://www.cnblogs.com/chenguangliang/p/5856701.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="never">
+    <meta property="og:description" content="先回答我：为什么模块很重要？ 答：因为有了模块，我们就可以更方便地使用别人的代码，想要什么功能，就加载什么模块。但是，这样做有一个前提，那就是大家必须以同样的方式编写模块，否则你有你的写法，我有我的写">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>js模块化编程之彻底弄懂CommonJS和AMD/CMD！ - 每天都要学进去一些 - 博客园</title>
+    
+    <link rel="stylesheet" href="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/blog-common.min.css">
+    <link id="MainCss" rel="stylesheet" href="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/bundle-codinglife.min.css">
+    <link type="text/css" rel="stylesheet" href="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/custom.css">
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/bundle-codinglife-mobile.min.css">
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/chenguangliang/rss">
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/chenguangliang/rsd.xml">
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/chenguangliang/wlwmanifest.xml">
+    <script src="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/amp4ads-host-v0.js.下载"></script><script async="" src="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/analytics.js.下载"></script><script type="text/javascript" src="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/encoder.js.下载"></script><script src="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/jquery-2.2.0.min.js.下载"></script>
+    <script src="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/blog-common.min.js.下载"></script>
+    <script>
+        var currentBlogId = 301310;
+        var currentBlogApp = 'chenguangliang';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'CodingLife';
+    </script>
+    
+    
+    
+<link rel="preload" href="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/f.txt" as="script"><script type="text/javascript" src="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/f.txt"></script><script src="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/pubads_impl_2020042703.js.下载" async=""></script><link rel="prefetch" href="https://tpc.googlesyndication.com/safeframe/1-0-37/html/container.html"></head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/chenguangliang/"><img id="blogLogo" src="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/logo.gif" alt="返回主页"></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/chenguangliang/">每天都要学进去一些</a>
+</h1>
+<h2>
+无论你今天什么状态，无论多少都要学进去一些。——语文老师
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/chenguangliang/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E6%AF%8F%E5%A4%A9%E9%83%BD%E8%A6%81%E5%AD%A6%E8%BF%9B%E5%8E%BB%E4%B8%80%E4%BA%9B">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/chenguangliang/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+51&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+19</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/chenguangliang/p/5856701.html">js模块化编程之彻底弄懂CommonJS和AMD/CMD！</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p><span style="font-family: &#39;Microsoft YaHei&#39;;"><span style="font-size: 16px; line-height: 24px;">先回答我：为什么模块很重要？</span></span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">答：因为有了模块，我们就可以更方便地使用别人的代码，想要什么功能，就加载什么模块。</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">但是，这样做有一个前提，那就是大家必须以同样的方式编写模块，否则你有你的写法，我有我的写法，岂不是乱了套！</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;;"><span style="font-size: 16px; line-height: 24px;">于是下面三个模块规范出来了，这篇文章也出来了（拼出来的 {捂脸笑}）。</span></span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">JS中的模块规范（CommonJS，AMD，CMD），如果你听过js模块化这个东西，那么你就应该听过或CommonJS或AMD甚至是CMD这些规范咯，我也听过，但之前也真的是听听而已。<span style="line-height: 1.5;">&nbsp;现在就看看吧，这些规范到底是啥东西，干嘛的。本文包括这三个规范的来源及对应的产物的原理。</span></span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;;">&nbsp;</span></p>
+<p><strong><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 18pt;">一、CommonJS</span></strong></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">1.一开始大家都认为JS是辣鸡，没什么用，官方定义的API只能构建基于浏览器的应用程序，逗我呢，这太狭隘了吧(用了个高端词，嘎嘎)，CommonJS就按耐不住了，CommonJS API定义很多普通应用程序（主要指非浏览器的应用）使用的API，从而填补了这个空白。它的终极目标是提供一个类似Python，Ruby和Java标准库。这样的话，开发者可以使用CommonJS API编写应用程序，然后这些应用可以运行在不同的JavaScript解释器和不同的主机环境中。</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">在兼容CommonJS的系统中，你可以使用JavaScript开发以下程序：</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">(1).服务器端JavaScript应用程序</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">(2).命令行工具</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">(3).图形界面应用程序</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">(4).混合应用程序（如，Titanium或Adobe AIR）</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">2009年，美国程序员Ryan Dahl创造了<a href="http://nodejs.org/" target="_blank">node.js</a>项目，将javascript语言用于服务器端编程。这标志"Javascript模块化编程"正式诞生。因为老实说，在浏览器环境下，没有模块也不是特别大的问题，毕竟网页程序的复杂性有限；但是在服务器端，一定要有模块，与操作系统和其他应用程序互动，否则根本没法编程。NodeJS是CommonJS规范的实现，webpack 也是以CommonJS的形式来书写。</span></p>
+<div>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">node.js的<a href="http://nodejs.org/docs/latest/api/modules.html" target="_blank">模块系统</a>，就是参照<a href="http://wiki.commonjs.org/wiki/Modules/1.1" target="_blank">CommonJS</a>规范实现的。在CommonJS中，有一个全局性方法require()，用于加载模块。假定有一个数学模块math.js，就可以像下面这样加载。</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">var math = require('math');</span></p>
+
+
+
+
+
+
+
+
+</blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">然后，就可以调用模块提供的方法：</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　var math = require('math');</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">&nbsp; &nbsp; &nbsp; math.add(2,3); // 5</span></p>
+
+
+
+
+
+
+
+
+</blockquote>
+
+
+
+
+
+
+
+
+</div>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">CommonJS定义的模块分为:{模块引用(require)} {模块定义(exports)} {模块标识(module)}</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">require()用来引入外部模块；exports对象用于导出当前模块的方法或变量，唯一的导出口；module对象就代表模块本身。</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">虽说Node遵循CommonJS的规范，但是相比也是做了一些取舍，填了一些新东西的。</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">不过，说了CommonJS也说了Node，那么我觉得也得先了解下NPM了。NPM作为Node的包管理器，不是为了帮助Node解决依赖包的安装问题嘛，那它肯定也要遵循CommonJS规范啦，它遵循包规范（还是理论）的。<a href="http://en.wikipedia.org/wiki/CommonJS" target="_blank">CommonJS WIKI</a>讲了它的历史，还介绍了modules和packages等。</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">下面讲讲commonJS的原理以及简易实现：</span></p>
+<h2><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">1、原理</span></h2>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">浏览器不兼容CommonJS的根本原因，在于缺少四个Node.js环境的变量。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<ul>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">module</span></li>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">exports</span></li>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">require</span></li>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">global</span></li>
+
+
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">只要能够提供这四个变量，浏览器就能加载 CommonJS 模块。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">下面是一个简单的示例。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<pre class=" language-javascript"><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;"><code class="language-javascript hljs">
+<span class="token keyword"><span class="hljs-keyword">var</span> <span class="hljs-built_in">module</span> <span class="token operator">= <span class="token punctuation">{
+  <span class="hljs-attr">exports</span><span class="token punctuation">: <span class="token punctuation">{<span class="token punctuation">}
+<span class="token punctuation">}<span class="token punctuation">;
+
+<span class="token punctuation">(<span class="token keyword"><span class="hljs-function"><span class="hljs-keyword">function</span></span><span class="token punctuation"><span class="hljs-function">(<span class="hljs-params">module</span></span><span class="token punctuation"><span class="hljs-function"><span class="hljs-params">, exports</span></span><span class="token punctuation"><span class="hljs-function">) </span><span class="token punctuation">{
+  exports<span class="token punctuation">.multiply <span class="token operator">= <span class="token keyword"><span class="hljs-function"><span class="hljs-keyword">function</span> </span><span class="token punctuation"><span class="hljs-function">(<span class="hljs-params">n</span></span><span class="token punctuation"><span class="hljs-function">) </span><span class="token punctuation">{ <span class="token keyword"><span class="hljs-keyword">return</span> n <span class="token operator">* <span class="token number"><span class="hljs-number">1000</span> <span class="token punctuation">}<span class="token punctuation">;
+<span class="token punctuation">}<span class="token punctuation">(<span class="hljs-built_in">module</span><span class="token punctuation">, <span class="hljs-built_in">module</span><span class="token punctuation">.exports<span class="token punctuation">)<span class="token punctuation">)
+
+<span class="token keyword"><span class="hljs-keyword">var</span> f <span class="token operator">= <span class="hljs-built_in">module</span><span class="token punctuation">.exports<span class="token punctuation">.multiply<span class="token punctuation">;
+<span class="token function">f<span class="token punctuation">(<span class="token number"><span class="hljs-number">5</span><span class="token punctuation">)<span class="token comment"> <span class="hljs-comment">// 5000 </span>
+</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></code></span></pre>
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">上面代码向一个立即执行函数提供 module 和 exports 两个外部变量，模块就放在这个立即执行函数里面。模块的输出值放在 module.exports 之中，这样就实现了模块的加载。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<h2><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">2、Browserify 的实现</span></h2>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">知道了原理，就能做出工具了。<a href="http://browserify.org/" target="_blank">Browserify</a>&nbsp;是目前最常用的 CommonJS 格式转换的工具。</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">请看一个例子，main.js 模块加载 foo.js 模块。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<pre class=" language-javascript"><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;"><code class="language-javascript hljs"><span class="token comment">
+<span class="hljs-comment">// foo.js</span>
+<span class="hljs-built_in">module</span><span class="token punctuation">.exports <span class="token operator">= <span class="token keyword"><span class="hljs-function"><span class="hljs-keyword">function</span></span><span class="token punctuation"><span class="hljs-function">(<span class="hljs-params">x</span></span><span class="token punctuation"><span class="hljs-function">) </span><span class="token punctuation">{
+  <span class="hljs-built_in">console</span><span class="token punctuation">.<span class="token function">log<span class="token punctuation">(x<span class="token punctuation">)<span class="token punctuation">;
+<span class="token punctuation">}<span class="token punctuation">;
+<span class="token comment">
+<span class="hljs-comment">// main.js</span>
+<span class="token keyword"><span class="hljs-keyword">var</span> foo <span class="token operator">= <span class="token function"><span class="hljs-built_in">require</span><span class="token punctuation">(<span class="token string"><span class="hljs-string">"./foo"</span><span class="token punctuation">)<span class="token punctuation">;
+<span class="token function">foo<span class="token punctuation">(<span class="token string"><span class="hljs-string">"Hi"</span><span class="token punctuation">)<span class="token punctuation">;
+</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></code></span></pre>
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">使用下面的命令，就能将main.js转为浏览器可用的格式。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<pre class=" language-bash"><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;"><code class="language-bash hljs">
+$ browserify main<span class="token punctuation">.js <span class="token operator">&gt; compiled<span class="token punctuation">.js
+</span></span></span></code></span></pre>
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">Browserify到底做了什么？安装一下<a href="https://www.npmjs.com/package/browser-unpack" target="_blank">browser-unpack</a>，就能看清楚了。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<pre class=" language-bash"><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;"><code class="language-bash hljs">
+$ npm install browser<span class="token operator">-unpack <span class="token operator">-g
+</span></span></code></span></pre>
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">然后，将前面生成的compile.js解包。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<pre class=" language-bash"><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;"><code class="language-bash hljs">
+$ browser<span class="token operator">-unpack <span class="token operator">&lt; compiled<span class="token punctuation">.js
+
+<span class="token punctuation">[
+  <span class="token punctuation">{
+    <span class="token string"><span class="hljs-string">"id"</span><span class="token punctuation">:<span class="token number">1<span class="token punctuation">,
+    <span class="token string"><span class="hljs-string">"source"</span><span class="token punctuation">:<span class="token string"><span class="hljs-string">"module.exports = function(x) {\n  console.log(x);\n};"</span><span class="token punctuation">,
+    <span class="token string"><span class="hljs-string">"deps"</span><span class="token punctuation">:<span class="token punctuation">{<span class="token punctuation">}
+  <span class="token punctuation">}<span class="token punctuation">,
+  <span class="token punctuation">{
+    <span class="token string"><span class="hljs-string">"id"</span><span class="token punctuation">:<span class="token number">2<span class="token punctuation">,
+    <span class="token string"><span class="hljs-string">"source"</span><span class="token punctuation">:<span class="token string"><span class="hljs-string">"var foo = require(\"./foo\");\nfoo(\"Hi\");"</span><span class="token punctuation">,
+    <span class="token string"><span class="hljs-string">"deps"</span><span class="token punctuation">:<span class="token punctuation">{<span class="token string"><span class="hljs-string">"./foo"</span><span class="token punctuation">:<span class="token number">1<span class="token punctuation">}<span class="token punctuation">,
+    <span class="token string"><span class="hljs-string">"entry"</span><span class="token punctuation">:<span class="token boolean"><span class="hljs-literal">true</span>
+  <span class="token punctuation">}
+<span class="token punctuation">]
+</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></code></span></pre>
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">可以看到，browerify 将所有模块放入一个数组，id 属性是模块的编号，source 属性是模块的源码，deps 属性是模块的依赖。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">因为 main.js 里面加载了 foo.js，所以 deps 属性就指定 ./foo 对应1号模块。执行的时候，浏览器遇到 require('./foo') 语句，就自动执行1号模块的 source 属性，并将执行后的 module.exports 属性值输出。</span></p>
+<p>&nbsp;</p>
+<h2><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">3、Tiny Browser Require</span></h2>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">虽然 Browserify 很强大，但不能在浏览器里操作，有时就很不方便。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">我根据&nbsp;<a href="https://github.com/mochajs/mocha" target="_blank">mocha</a>&nbsp;的内部实现，做了一个纯浏览器的 CommonJS 模块加载器&nbsp;<a href="https://github.com/ruanyf/tiny-browser-require" target="_blank">tiny-browser-require</a>&nbsp;。完全不需要命令行，直接放进浏览器即可，所有代码只有30多行。</span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;;"><a href="https://github.com/ruanyf/tiny-browser-require" target="_blank"><img title="" src="http://image.beekka.com/blog/2015/bg2015052203.png" alt=""></a></span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">它的逻辑非常简单，就是把模块读入数组，加载路径就是模块的id。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<pre class=" language-javascript"><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;"><code class="language-javascript hljs">
+<span class="token keyword"><span class="hljs-function"><span class="hljs-keyword">function</span> </span><span class="token function"><span class="hljs-function"><span class="hljs-title">require</span></span><span class="token punctuation"><span class="hljs-function">(<span class="hljs-params">p</span></span><span class="token punctuation"><span class="hljs-function">)</span><span class="token punctuation">{
+  <span class="token keyword"><span class="hljs-keyword">var</span> path <span class="token operator">= <span class="hljs-built_in">require</span><span class="token punctuation">.<span class="token function">resolve<span class="token punctuation">(p<span class="token punctuation">)<span class="token punctuation">;
+  <span class="token keyword"><span class="hljs-keyword">var</span> mod <span class="token operator">= <span class="hljs-built_in">require</span><span class="token punctuation">.modules<span class="token punctuation">[path<span class="token punctuation">]<span class="token punctuation">;
+  <span class="token keyword"><span class="hljs-keyword">if</span> <span class="token punctuation">(<span class="token operator">!mod<span class="token punctuation">) <span class="token keyword"><span class="hljs-keyword">throw</span> <span class="token keyword"><span class="hljs-keyword">new</span> <span class="token class-name"><span class="hljs-built_in">Error</span><span class="token punctuation">(<span class="token string"><span class="hljs-string">'failed to require "'</span> <span class="token operator">+ p <span class="token operator">+ <span class="token string"><span class="hljs-string">'"'</span><span class="token punctuation">)<span class="token punctuation">;
+  <span class="token keyword"><span class="hljs-keyword">if</span> <span class="token punctuation">(<span class="token operator">!mod<span class="token punctuation">.exports<span class="token punctuation">) <span class="token punctuation">{
+    mod<span class="token punctuation">.exports <span class="token operator">= <span class="token punctuation">{<span class="token punctuation">}<span class="token punctuation">;
+    mod<span class="token punctuation">.<span class="token function">call<span class="token punctuation">(mod<span class="token punctuation">.exports<span class="token punctuation">, mod<span class="token punctuation">, mod<span class="token punctuation">.exports<span class="token punctuation">, <span class="hljs-built_in">require</span><span class="token punctuation">.<span class="token function">relative<span class="token punctuation">(path<span class="token punctuation">)<span class="token punctuation">)<span class="token punctuation">;
+  <span class="token punctuation">}
+  <span class="token keyword"><span class="hljs-keyword">return</span> mod<span class="token punctuation">.exports<span class="token punctuation">;
+<span class="token punctuation">}
+
+<span class="hljs-built_in">require</span><span class="token punctuation">.modules <span class="token operator">= <span class="token punctuation">{<span class="token punctuation">}<span class="token punctuation">;
+
+<span class="hljs-built_in">require</span><span class="token punctuation">.resolve <span class="token operator">= <span class="token keyword"><span class="hljs-function"><span class="hljs-keyword">function</span> </span><span class="token punctuation"><span class="hljs-function">(<span class="hljs-params">path</span></span><span class="token punctuation"><span class="hljs-function">)</span><span class="token punctuation">{
+  <span class="token keyword"><span class="hljs-keyword">var</span> orig <span class="token operator">= path<span class="token punctuation">;
+  <span class="token keyword"><span class="hljs-keyword">var</span> reg <span class="token operator">= path <span class="token operator">+ <span class="token string"><span class="hljs-string">'.js'</span><span class="token punctuation">;
+  <span class="token keyword"><span class="hljs-keyword">var</span> index <span class="token operator">= path <span class="token operator">+ <span class="token string"><span class="hljs-string">'/index.js'</span><span class="token punctuation">;
+  <span class="token keyword"><span class="hljs-keyword">return</span> <span class="hljs-built_in">require</span><span class="token punctuation">.modules<span class="token punctuation">[reg<span class="token punctuation">] <span class="token operator">&amp;&amp; reg
+    <span class="token operator">|| <span class="hljs-built_in">require</span><span class="token punctuation">.modules<span class="token punctuation">[index<span class="token punctuation">] <span class="token operator">&amp;&amp; index
+    <span class="token operator">|| orig<span class="token punctuation">;
+<span class="token punctuation">}<span class="token punctuation">;
+
+<span class="hljs-built_in">require</span><span class="token punctuation">.register <span class="token operator">= <span class="token keyword"><span class="hljs-function"><span class="hljs-keyword">function</span> </span><span class="token punctuation"><span class="hljs-function">(<span class="hljs-params">path</span></span><span class="token punctuation"><span class="hljs-function"><span class="hljs-params">, fn</span></span><span class="token punctuation"><span class="hljs-function">)</span><span class="token punctuation">{
+  <span class="hljs-built_in">require</span><span class="token punctuation">.modules<span class="token punctuation">[path<span class="token punctuation">] <span class="token operator">= fn<span class="token punctuation">;
+<span class="token punctuation">}<span class="token punctuation">;
+
+<span class="hljs-built_in">require</span><span class="token punctuation">.relative <span class="token operator">= <span class="token keyword"><span class="hljs-function"><span class="hljs-keyword">function</span> </span><span class="token punctuation"><span class="hljs-function">(<span class="hljs-params">parent</span></span><span class="token punctuation"><span class="hljs-function">) </span><span class="token punctuation">{
+  <span class="token keyword"><span class="hljs-keyword">return</span> <span class="token keyword"><span class="hljs-function"><span class="hljs-keyword">function</span></span><span class="token punctuation"><span class="hljs-function">(<span class="hljs-params">p</span></span><span class="token punctuation"><span class="hljs-function">)</span><span class="token punctuation">{
+    <span class="token keyword"><span class="hljs-keyword">if</span> <span class="token punctuation">(<span class="token string"><span class="hljs-string">'.'</span> <span class="token operator">!<span class="token operator">= p<span class="token punctuation">.<span class="token function">charAt<span class="token punctuation">(<span class="token number"><span class="hljs-number">0</span><span class="token punctuation">)<span class="token punctuation">) <span class="token keyword"><span class="hljs-keyword">return</span> <span class="token function"><span class="hljs-built_in">require</span><span class="token punctuation">(p<span class="token punctuation">)<span class="token punctuation">;
+    <span class="token keyword"><span class="hljs-keyword">var</span> path <span class="token operator">= parent<span class="token punctuation">.<span class="token function">split<span class="token punctuation">(<span class="token string"><span class="hljs-string">'/'</span><span class="token punctuation">)<span class="token punctuation">;
+    <span class="token keyword"><span class="hljs-keyword">var</span> segs <span class="token operator">= p<span class="token punctuation">.<span class="token function">split<span class="token punctuation">(<span class="token string"><span class="hljs-string">'/'</span><span class="token punctuation">)<span class="token punctuation">;
+    path<span class="token punctuation">.<span class="token function">pop<span class="token punctuation">(<span class="token punctuation">)<span class="token punctuation">;
+
+    <span class="token keyword"><span class="hljs-keyword">for</span> <span class="token punctuation">(<span class="token keyword"><span class="hljs-keyword">var</span> i <span class="token operator">= <span class="token number"><span class="hljs-number">0</span><span class="token punctuation">; i <span class="token operator">&lt; segs<span class="token punctuation">.length<span class="token punctuation">; i<span class="token operator">++<span class="token punctuation">) <span class="token punctuation">{
+      <span class="token keyword"><span class="hljs-keyword">var</span> seg <span class="token operator">= segs<span class="token punctuation">[i<span class="token punctuation">]<span class="token punctuation">;
+      <span class="token keyword"><span class="hljs-keyword">if</span> <span class="token punctuation">(<span class="token string"><span class="hljs-string">'..'</span> <span class="token operator">== seg<span class="token punctuation">) path<span class="token punctuation">.<span class="token function">pop<span class="token punctuation">(<span class="token punctuation">)<span class="token punctuation">;
+      <span class="token keyword"><span class="hljs-keyword">else</span> <span class="token keyword"><span class="hljs-keyword">if</span> <span class="token punctuation">(<span class="token string"><span class="hljs-string">'.'</span> <span class="token operator">!<span class="token operator">= seg<span class="token punctuation">) path<span class="token punctuation">.<span class="token function">push<span class="token punctuation">(seg<span class="token punctuation">)<span class="token punctuation">;
+    <span class="token punctuation">}
+
+    <span class="token keyword"><span class="hljs-keyword">return</span> <span class="token function"><span class="hljs-built_in">require</span><span class="token punctuation">(path<span class="token punctuation">.<span class="token function">join<span class="token punctuation">(<span class="token string"><span class="hljs-string">'/'</span><span class="token punctuation">)<span class="token punctuation">)<span class="token punctuation">;
+  <span class="token punctuation">}<span class="token punctuation">;
+<span class="token punctuation">}<span class="token punctuation">;
+</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></code></span></pre>
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">使用的时候，先将上面的代码放入页面。然后，将模块放在如下的立即执行函数里面，就可以调用了。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<pre><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;"><code class="language-html hljs xml">
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"require.js"</span> /&gt;</span><span class="xml">
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-built_in">require</span>.register(<span class="hljs-string">"moduleId"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">module, exports, require</span>)</span>{
+  <span class="hljs-comment">// Module code goes here</span>
+});
+<span class="hljs-keyword">var</span> result = <span class="hljs-built_in">require</span>(<span class="hljs-string">"moduleId"</span>);
+</span></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></span></pre>
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">还是以前面的 main.js 加载 foo.js 为例。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<pre class=" language-javascript"><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;"><code class="language-javascript hljs">
+<span class="hljs-built_in">require</span><span class="token punctuation">.<span class="token function">register<span class="token punctuation">(<span class="token string"><span class="hljs-string">"./foo.js"</span><span class="token punctuation">, <span class="token keyword"><span class="hljs-function"><span class="hljs-keyword">function</span></span><span class="token punctuation"><span class="hljs-function">(<span class="hljs-params">module</span></span><span class="token punctuation"><span class="hljs-function"><span class="hljs-params">, exports</span></span><span class="token punctuation"><span class="hljs-function"><span class="hljs-params">, require</span></span><span class="token punctuation"><span class="hljs-function">)</span><span class="token punctuation">{
+  <span class="hljs-built_in">module</span><span class="token punctuation">.exports <span class="token operator">= <span class="token keyword"><span class="hljs-function"><span class="hljs-keyword">function</span></span><span class="token punctuation"><span class="hljs-function">(<span class="hljs-params">x</span></span><span class="token punctuation"><span class="hljs-function">) </span><span class="token punctuation">{
+    <span class="hljs-built_in">console</span><span class="token punctuation">.<span class="token function">log<span class="token punctuation">(x<span class="token punctuation">)<span class="token punctuation">;
+  <span class="token punctuation">}<span class="token punctuation">;
+<span class="token punctuation">}<span class="token punctuation">)<span class="token punctuation">;
+
+<span class="token keyword"><span class="hljs-keyword">var</span> foo <span class="token operator">= <span class="token function"><span class="hljs-built_in">require</span><span class="token punctuation">(<span class="token string"><span class="hljs-string">"./foo.js"</span><span class="token punctuation">)<span class="token punctuation">;
+<span class="token function">foo<span class="token punctuation">(<span class="token string"><span class="hljs-string">"Hi"</span><span class="token punctuation">)<span class="token punctuation">;
+</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></code></span></pre>
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">注意，这个库只模拟了 require 、module 、exports 三个变量，如果模块还用到了 global 或者其他 Node 专有变量（比如 process），就通过立即执行函数提供即可。</span></p>
+<p><strong><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 18pt;">二、AMD</span></strong></p>
+<p><span style="font-size: 16px;"><span style="font-family: &#39;Microsoft YaHei&#39;;">基于commonJS规范的nodeJS出来以后，服务端的模块概念已经形成<span style="font-family: &#39;Microsoft YaHei&#39;;">，</span></span><span style="font-family: &#39;Microsoft YaHei&#39;;">很自然地，大家就想要客户端模块。而且最好两者能够兼容，一个模块不用修改，在服务器和浏览器都可以运行。</span><span style="font-family: &#39;Microsoft YaHei&#39;;">但是，由于一个重大的局限，使得CommonJS规范不适用于浏览器环境。还是上面的代码，如果在浏览器中运行，会有一个很大的问题，你能看出来吗？</span></span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　var math = require('math');</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　math.add(2, 3);</span></p>
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">第二行math.add(2, 3)，在第一行require('math')之后运行，因此必须等math.js加载完成。也就是说，如果加载时间很长，整个应用就会停在那里等。<span style="color: #ff0000;"><strong><span style="font-family: &#39;Microsoft YaHei&#39;;">您会注意到&nbsp;<code>require</code>&nbsp;是同步的。</span></strong></span></span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">这对服务器端不是一个问题，因为所有的模块都存放在本地硬盘，可以同步加载完成，等待时间就是硬盘的读取时间。但是，对于浏览器，这却是一个大问题，因为模块都放在服务器端，等待时间取决于网速的快慢，可能要等很长时间，浏览器处于"假死"状态。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">因此，浏览器端的模块，不能采用"同步加载"（synchronous），只能采用"异步加载"（asynchronous）。这就是AMD规范诞生的背景。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;"><span style="font-family: &#39;Microsoft YaHei&#39;;">CommonJS是主要为了JS在后端的表现制定的，他是不适合前端的</span><span style="font-family: &#39;Microsoft YaHei&#39;; line-height: 1.5;">，AMD(异步模块定义)出现了，它就主要为前端JS的表现制定规范。</span></span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;"><a href="https://github.com/amdjs/amdjs-api/wiki/AMD" target="_blank">AMD</a>是"Asynchronous Module Definition"的缩写，意思就是"异步模块定义"。它采用异步方式加载模块，模块的加载不影响它后面语句的运行。所有依赖这个模块的语句，都定义在一个回调函数中，等到加载完成之后，这个回调函数才会运行。</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">AMD也采用require()语句加载模块，但是不同于CommonJS，它要求两个参数：</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　require([module], callback);</span></p>
+</blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">第一个参数[module]，是一个数组，里面的成员就是要加载的模块；第二个参数callback，则是加载成功之后的回调函数。如果将前面的代码改写成AMD形式，就是下面这样：</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　require(['math'], function (math) {</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　math.add(2, 3);</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　});</span></p>
+</blockquote>
+<p><span style="font-size: 16px;"><span style="font-family: &#39;Microsoft YaHei&#39;;">math.add()与math模块加载不是同步的，浏览器不会发生假死。所以很显然，AMD比较适合浏览器环境。</span><span style="font-family: &#39;Microsoft YaHei&#39;;">目前，主要有两个Javascript库实现了AMD规范：<a href="http://requirejs.org/" target="_blank">require.js</a>和<a href="https://github.com/cujojs/curl" target="_blank">curl.js</a>。</span></span></p>
+<p><span style="color: #ff0000; font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;"><strong>RequireJS就是实现了AMD规范的呢。</strong></span></p>
+<p><span style="color: #000000; font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;"><strong>详细概括：下面以RequireJS为例说明AMD规范</strong></span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">一、为什么要用require.js？</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">最早的时候，所有Javascript代码都写在一个文件里面，只要加载这一个文件就够了。后来，代码越来越多，一个文件不够了，必须分成多个文件，依次加载。下面的网页代码，相信很多人都见过。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　&lt;script src="1.js"&gt;&lt;/script&gt;</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　&lt;script src="2.js"&gt;&lt;/script&gt;</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　&lt;script src="3.js"&gt;&lt;/script&gt;</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　&lt;script src="4.js"&gt;&lt;/script&gt;</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　&lt;script src="5.js"&gt;&lt;/script&gt;</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　&lt;script src="6.js"&gt;&lt;/script&gt;</span></p>
+
+
+
+
+
+
+
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">这段代码依次加载多个js文件。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">这样的写法有很大的缺点。首先，加载的时候，浏览器会停止网页渲染，加载文件越多，网页失去响应的时间就会越长；其次，由于js文件之间存在依赖关系，因此必须严格保证加载顺序（比如上例的1.js要在2.js的前面），依赖性最大的模块一定要放到最后加载，当依赖关系很复杂的时候，代码的编写和维护都会变得困难。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">require.js的诞生，就是为了解决这两个问题：</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;;">　　<img src="http://image.beekka.com/blog/201211/bg2012110701.png" alt=""></span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;;">　　<span style="font-size: 16px;">（1）实现js文件的异步加载，避免网页失去响应；</span></span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　（2）管理模块之间的依赖性，便于代码的编写和维护。</span></p>
+
+
+
+
+
+
+
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">二、require.js的加载</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">使用require.js的第一步，是先去官方网站<a href="http://requirejs.org/docs/download.html" target="_blank">下载</a>最新版本。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">下载后，假定把它放在js子目录下面，就可以加载了。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　&lt;script src="js/require.js"&gt;&lt;/script&gt;</span></p>
+
+
+
+
+
+
+
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">有人可能会想到，加载这个文件，也可能造成网页失去响应。解决办法有两个，一个是把它放在网页底部加载，另一个是写成下面这样：</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　&lt;script src="js/require.js"&nbsp;defer async="true"&nbsp;&gt;&lt;/script&gt;</span></p>
+
+
+
+
+
+
+
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">async属性表明这个文件需要异步加载，避免网页失去响应。IE不支持这个属性，只支持defer，所以把defer也写上。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">加载require.js以后，下一步就要加载我们自己的代码了。假定我们自己的代码文件是main.js，也放在js目录下面。那么，只需要写成下面这样就行了：</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　&lt;script src="js/require.js"&nbsp;data-main="js/main"&gt;&lt;/script&gt;</span></p>
+
+
+
+
+
+
+
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">data-main属性的作用是，指定网页程序的主模块。在上例中，就是js目录下面的main.js，这个文件会第一个被require.js加载。由于require.js默认的文件后缀名是js，所以可以把main.js简写成main。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">三、主模块的写法</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">上一节的main.js，我把它称为"主模块"，意思是整个网页的入口代码。它有点像C语言的main()函数，所有代码都从这儿开始运行。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">下面就来看，怎么写main.js。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">如果我们的代码不依赖任何其他模块，那么可以直接写入javascript代码。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　// main.js</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　alert("加载成功！");</span></p>
+
+
+
+
+
+
+
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">但这样的话，就没必要使用require.js了。真正常见的情况是，主模块依赖于其他模块，这时就要使用AMD规范定义的的require()函数。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　// main.js</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　require(['moduleA', 'moduleB', 'moduleC'], function (moduleA, moduleB, moduleC){</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　// some code here</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　});</span></p>
+
+
+
+
+
+
+
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">require()函数接受两个参数。第一个参数是一个数组，表示所依赖的模块，上例就是['moduleA', 'moduleB', 'moduleC']，即主模块依赖这三个模块；第二个参数是一个回调函数，当前面指定的模块都加载成功后，它将被调用。加载的模块会以参数形式传入该函数，从而在回调函数内部就可以使用这些模块。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">require()异步加载moduleA，moduleB和moduleC，浏览器不会失去响应；它指定的回调函数，只有前面的模块都加载成功后，才会运行，解决了依赖性的问题。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">下面，我们看一个实际的例子。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">假定主模块依赖jquery、underscore和backbone这三个模块，main.js就可以这样写：</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　require(['jquery', 'underscore', 'backbone'], function ($, _, Backbone){</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　// some code here</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　});</span></p>
+
+
+
+
+
+
+
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">require.js会先加载jQuery、underscore和backbone，然后再运行回调函数。主模块的代码就写在回调函数中。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">四、模块的加载</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">上一节最后的示例中，主模块的依赖模块是['jquery', 'underscore', 'backbone']。默认情况下，require.js假定这三个模块与main.js在同一个目录，文件名分别为jquery.js，underscore.js和backbone.js，然后自动加载。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">使用require.config()方法，我们可以对模块的加载行为进行自定义。require.config()就写在主模块（main.js）的头部。参数就是一个对象，这个对象的paths属性指定各个模块的加载路径。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　require.config({</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　paths: {</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　"jquery": "jquery.min",</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　"underscore": "underscore.min",</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　"backbone": "backbone.min"</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　}</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　});</span></p>
+
+
+
+
+
+
+
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">上面的代码给出了三个模块的文件名，路径默认与main.js在同一个目录（js子目录）。如果这些模块在其他目录，比如js/lib目录，则有两种写法。一种是逐一指定路径。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　require.config({</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　paths: {</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　"jquery": "lib/jquery.min",</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　"underscore": "lib/underscore.min",</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　"backbone": "lib/backbone.min"</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　}</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　});</span></p>
+
+
+
+
+
+
+
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">另一种则是直接改变基目录（baseUrl）。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　require.config({</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　baseUrl: "js/lib",</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　paths: {</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　"jquery": "jquery.min",</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　"underscore": "underscore.min",</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　"backbone": "backbone.min"</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　}</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　});</span></p>
+
+
+
+
+
+
+
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">如果某个模块在另一台主机上，也可以直接指定它的网址，比如：</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　require.config({</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　paths: {</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　"jquery": "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min"</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　}</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　});</span></p>
+
+
+
+
+
+
+
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">require.js要求，每个模块是一个单独的js文件。这样的话，如果加载多个模块，就会发出多次HTTP请求，会影响网页的加载速度。因此，require.js提供了一个<a href="http://requirejs.org/docs/optimization.html" target="_blank">优化工具</a>，当模块部署完毕以后，可以用这个工具将多个模块合并在一个文件中，减少HTTP请求数。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">五、AMD模块的写法</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">require.js加载的模块，采用AMD规范。也就是说，模块必须按照AMD的规定来写。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">具体来说，就是模块必须采用特定的define()函数来定义。如果一个模块不依赖其他模块，那么可以直接定义在define()函数之中。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">假定现在有一个math.js文件，它定义了一个math模块。那么，math.js就要这样写：</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　// math.js</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　define(function (){</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　var add = function (x,y){</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　return x+y;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　};</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　return {</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　add: add</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　};</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　});</span></p>
+
+
+
+
+
+
+
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">加载方法如下：</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　// main.js</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　require(['math'], function (math){</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　alert(math.add(1,1));</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　});</span></p>
+
+
+
+
+
+
+
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">如果这个模块还依赖其他模块，那么define()函数的第一个参数，必须是一个数组，指明该模块的依赖性。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　define(['myLib'], function(myLib){</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　function foo(){</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　myLib.doSomething();</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　}</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　return {</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　foo : foo</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　};</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　});</span></p>
+
+
+
+
+
+
+
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">当require()函数加载上面这个模块的时候，就会先加载myLib.js文件。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">六、加载非规范的模块</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">理论上，require.js加载的模块，必须是按照AMD规范、用define()函数定义的模块。但是实际上，虽然已经有一部分流行的函数库（比如jQuery）符合AMD规范，更多的库并不符合。那么，require.js是否能够加载非规范的模块呢？</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">回答是可以的。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">这样的模块在用require()加载之前，要先用require.config()方法，定义它们的一些特征。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">举例来说，underscore和backbone这两个库，都没有采用AMD规范编写。如果要加载它们的话，必须先定义它们的特征。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　require.config({</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　shim: {</span><br><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　'underscore':{</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　　　exports: '_'</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　},</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　'backbone': {</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　　　deps: ['underscore', 'jquery'],</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　　　exports: 'Backbone'</span><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　}</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　}</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　});</span></p>
+
+
+
+
+
+
+
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">require.config()接受一个配置对象，这个对象除了有前面说过的paths属性之外，还有一个shim属性，专门用来配置不兼容的模块。具体来说，每个模块要定义（1）exports值（输出的变量名），表明这个模块外部调用时的名称；（2）deps数组，表明该模块的依赖性。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">比如，jQuery的插件可以这样定义：</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　shim: {</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　'jquery.scroll': {</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　deps: ['jquery'],</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　exports: 'jQuery.fn.scroll'</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　}</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　}</span></p>
+
+
+
+
+
+
+
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">七、require.js插件</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">require.js还提供一系列<a href="https://github.com/jrburke/requirejs/wiki/Plugins" target="_blank">插件</a>，实现一些特定的功能。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">domready插件，可以让回调函数在页面DOM结构加载完成后再运行。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　require(['domready!'], function (doc){</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　// called once the DOM is ready</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　});</span></p>
+
+
+
+
+
+
+
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">text和image插件，则是允许require.js加载文本和图片文件。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<blockquote>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　define([</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　'text!review.txt',</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　'image!cat.jpg'</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　],</span><br><br><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　function(review,cat){</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　console.log(review);</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　　　document.body.appendChild(cat);</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　　　}</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">　　);</span></p>
+
+
+
+
+
+
+
+</blockquote>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">类似的插件还有json和mdown，用于加载json文件和markdown文件。（完）</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: 幼圆; font-size: 16px;">另一个人的概括(有点简单)：</span></p>
+<p><span style="font-family: 幼圆; font-size: 16px;">AMD就只有一个接口：define(id?,dependencies?,factory);</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: 幼圆; font-size: 16px;">它要在声明模块的时候制定所有的依赖(dep)，并且还要当做形参传到factory中，像这样：</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<div class="cnblogs_code">
+<pre><span style="font-family: 幼圆; font-size: 16px;">1 define(['dep1','dep2'],function(dep1,dep2){...});</span></pre>
+</div>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: 幼圆; font-size: 16px;">要是没什么依赖，就定义简单的模块，下面这样就可以啦：</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="font-family: 幼圆; font-size: 16px;">1 define(function(){
+2     var exports = {};
+3     exports.method = function(){...};
+4     return exports;
+5 });</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-family: 幼圆; font-size: 16px;">咦，这里有define，把东西包装起来啦，那Node实现中怎么没看到有define关键字呢，它也要把东西包装起来呀，其实吧，只是Node隐式包装了而已.....</span></p>
+<p><span style="font-family: 幼圆; font-size: 16px;">这有AMD的WIKI中文版，讲了很多蛮详细的东西，用到的时候可以查看：<a href="https://github.com/amdjs/amdjs-api/wiki/AMD-(%E4%B8%AD%E6%96%87%E7%89%88)" target="_blank">AMD的WIKI中文版</a></span></p>
+<p><span style="font-size: 18pt;"><strong><span style="font-family: &#39;Microsoft YaHei&#39;;">三、CMD</span></strong></span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">大名远扬的玉伯写了seajs，就是遵循他提出的CMD规范，与AMD蛮相近的，不过用起来感觉更加方便些，最重要的是中文版，应有尽有：<a href="http://seajs.org/docs/#docs" target="_blank">seajs官方doc</a></span></p>
+<div class="cnblogs_code">
+<pre><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">1 define(function(require,exports,module){...});</span></pre>
+</div>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">用过seajs吧，这个不陌生吧，对吧。</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">前面说AMD，说RequireJS实现了AMD，CMD看起来与AMD好像呀，那RequireJS与SeaJS像不像呢？</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">虽然CMD与AMD蛮像的，但区别还是挺明显的，官方非官方都有阐述和理解，我觉得吧，说的都挺好：</span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;"><a href="https://github.com/seajs/seajs/issues/277" target="_blank">官方阐述SeaJS与RequireJS异同</a></span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;"><a href="http://www.douban.com/note/283566440/" target="_blank">SeaJS与RequireJS的最大异同（这个说的也挺好）</a></span></p>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 16px;">&nbsp;</span></p>
+</div>
+<div id="MySignature" style="display: block;">以上这些只是为了学习做的总结，有部分摘自大牛原话，本人只是为了学习方便做的笔记，如有侵权，联系必删，致敬大牛！</div>
+<div class="clear"></div>
+<div id="blog_post_info_block"><div id="BlogPostCategory">
+    分类: 
+            <a href="https://www.cnblogs.com/chenguangliang/category/880201.html" target="_blank">前端工程化/模块化</a></div>
+
+
+    <div id="blog_post_info">
+<div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(5856701,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+        <a id="green_channel_follow" onclick="follow(&#39;3c728f1c-3139-e611-9fc1-ac853d9f53cc&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/chenguangliang/" target="_blank"><img src="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/20160824151355.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/chenguangliang/">每天都要学进去一些</a><br>
+            <a href="https://home.cnblogs.com/u/chenguangliang/followees/">关注 - 10</a><br>
+            <a href="https://home.cnblogs.com/u/chenguangliang/followers/">粉丝 - 45</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;3c728f1c-3139-e611-9fc1-ac853d9f53cc&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(5856701,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">24</span>
+    </div>
+    <div class="buryit" onclick="votePost(5856701,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+    <div class="clear"></div>
+    <div id="post_next_prev">
+
+    <a href="https://www.cnblogs.com/chenguangliang/p/5807682.html" class="p_n_p_prefix">« </a> 上一篇：    <a href="https://www.cnblogs.com/chenguangliang/p/5807682.html" title="发布于 2016-08-25 17:33">移动端商城，选框架，很纠结！</a>
+    <br>
+    <a href="https://www.cnblogs.com/chenguangliang/p/5863765.html" class="p_n_p_prefix">» </a> 下一篇：    <a href="https://www.cnblogs.com/chenguangliang/p/5863765.html" title="发布于 2016-09-12 19:47">webpack 学习笔记</a>
+
+</div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2016-09-09 15:07</span>&nbsp;
+<a href="https://www.cnblogs.com/chenguangliang/">每天都要学进去一些</a>&nbsp;
+阅读(<span id="post_view_count">96300</span>)&nbsp;
+评论(<span id="post_comment_count">14</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=5856701" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(5856701);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/highlight.min.js.下载"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 301310, cb_blogApp = 'chenguangliang', cb_blogUserGuid = '3c728f1c-3139-e611-9fc1-ac853d9f53cc';
+    var cb_entryId = 5856701, cb_entryCreatedDate = '2016-09-09 15:07', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder">
+
+<div id="comment_pager_top">
+    
+</div>
+
+<br>
+<div class="feedback_area_title">评论列表</div>
+<div class="feedbackNoItems"><div class="feedbackNoItems"></div></div>	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/chenguangliang/p/5856701.html#3621053" class="layer">#1楼</a>
+<a name="3621053" id="comment_anchor_3621053"></a>
+
+ 
+<span class="comment_date">2017-02-17 16:40</span>
+
+ 
+
+            <a id="a_comment_author_3621053" href="https://www.cnblogs.com/nanshanlaoyao/" target="_blank">南山老幺</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3621053" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    这个。。内容有点少啊
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3621053, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3621053, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_3621053_avatar" style="display:none">
+            https://pic.cnblogs.com/face/1022000/20160906184400.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/chenguangliang/p/5856701.html#3776234" class="layer">#2楼</a>
+<a name="3776234" id="comment_anchor_3776234"></a>
+
+ 
+<span class="comment_date">2017-09-06 10:14</span>
+
+ 
+
+            <a id="a_comment_author_3776234" href="https://www.cnblogs.com/pengaijin/" target="_blank">以梦为马~不负韶华</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3776234" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    我可以转载一下么
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3776234, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3776234, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_3776234_avatar" style="display:none">
+            https://pic.cnblogs.com/face/1192284/20190722102320.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/chenguangliang/p/5856701.html#3793270" class="layer">#3楼</a>
+<a name="3793270" id="comment_anchor_3793270"></a>
+
+ 
+<span class="comment_date">2017-09-22 13:58</span>
+
+ 
+
+            <a id="a_comment_author_3793270" href="https://www.cnblogs.com/oneboi/" target="_blank">金于虎</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3793270" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    很好
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3793270, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3793270, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/chenguangliang/p/5856701.html#3823615" class="layer">#4楼</a>
+<a name="3823615" id="comment_anchor_3823615"></a>
+
+ 
+<span class="comment_date">2017-10-27 14:59</span>
+
+ 
+
+            <a id="a_comment_author_3823615" href="https://home.cnblogs.com/u/1205721/" target="_blank">hzw29106</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3823615" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    CMD就这么一笔带过么？不解释详细些？
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3823615, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3823615, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/chenguangliang/p/5856701.html#3876149" class="layer">#5楼</a>
+<a name="3876149" id="comment_anchor_3876149"></a>
+
+ 
+<span class="comment_date">2017-12-28 13:12</span>
+
+ 
+
+            <a id="a_comment_author_3876149" href="https://www.cnblogs.com/singercoder/" target="_blank">singercoder</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3876149" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    写的太好了,如获至宝
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3876149, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3876149, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/chenguangliang/p/5856701.html#3912841" class="layer">#6楼</a>
+<a name="3912841" id="comment_anchor_3912841"></a>
+
+ 
+<span class="comment_date">2018-02-28 17:46</span>
+
+ 
+
+            <a id="a_comment_author_3912841" href="https://www.cnblogs.com/juliazhang/" target="_blank">julia_faneast</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3912841" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    很详细了，赞
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3912841, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3912841, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/chenguangliang/p/5856701.html#3941058" class="layer">#7楼</a>
+<a name="3941058" id="comment_anchor_3941058"></a>
+
+ 
+<span class="comment_date">2018-04-03 10:24</span>
+
+ 
+
+            <a id="a_comment_author_3941058" href="https://home.cnblogs.com/u/899551/" target="_blank">edgar52</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3941058" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    文章很好，支持。<br><br>CMD以sea.js为代表，企图同时拥有AMD和Common.js的优点。<br><br>可是sea.js最后还是挂了。<br><br>sea.js挂了是因为webpack等等文件打包工具从另外一个角度更好地解决同样的痛点，那就毫无必要用sea.js了。
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3941058, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3941058, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/chenguangliang/p/5856701.html#3985709" class="layer">#8楼</a>
+<a name="3985709" id="comment_anchor_3985709"></a>
+
+ 
+<span class="comment_date">2018-05-29 15:36</span>
+
+ 
+
+            <a id="a_comment_author_3985709" href="https://www.cnblogs.com/obcjy/" target="_blank">为你跑得快</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3985709" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    赞 终于理清楚了
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3985709, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3985709, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/chenguangliang/p/5856701.html#3993838" class="layer">#9楼</a>
+<a name="3993838" id="comment_anchor_3993838"></a>
+
+ 
+<span class="comment_date">2018-06-08 10:15</span>
+
+ 
+
+            <a id="a_comment_author_3993838" href="https://www.cnblogs.com/oxspirt/" target="_blank">立志做一个好的程序员</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_3993838" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    哇，js的模块化，从nodeJs端----》向浏览器客户端过渡，这个讲的很清楚，赞一个，谢谢你~
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3993838, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(3993838, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/chenguangliang/p/5856701.html#4110388" class="layer">#10楼</a>
+<a name="4110388" id="comment_anchor_4110388"></a>
+
+ 
+<span class="comment_date">2018-11-09 09:30</span>
+
+ 
+
+            <a id="a_comment_author_4110388" href="https://www.cnblogs.com/vlon/" target="_blank">scofieldliu</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4110388" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    上面介绍的很便于我这个小白理解，谢谢大神
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4110388, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4110388, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_4110388_avatar" style="display:none">
+            https://pic.cnblogs.com/face/1010139/20180920101434.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/chenguangliang/p/5856701.html#4117942" class="layer">#11楼</a>
+<a name="4117942" id="comment_anchor_4117942"></a>
+
+ 
+<span class="comment_date">2018-11-19 19:39</span>
+
+ 
+
+            <a id="a_comment_author_4117942" href="https://home.cnblogs.com/u/1520391/" target="_blank">梁杰1</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4117942" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    文章写得很好，通俗易懂，又有一定深度，我一定要转载下啊
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4117942, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4117942, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/chenguangliang/p/5856701.html#4134794" class="layer">#12楼</a>
+<a name="4134794" id="comment_anchor_4134794"></a>
+
+ 
+<span class="comment_date">2018-12-08 17:23</span>
+
+ 
+
+            <a id="a_comment_author_4134794" href="https://home.cnblogs.com/u/734010/" target="_blank">skchen</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4134794" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    很实用，非常感谢，两年前对于require.js还是囫囵吞吞枣，现在经过你一讲很清晰了，感谢你的分享。
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4134794, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4134794, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/chenguangliang/p/5856701.html#4161922" class="layer">#13楼</a>
+<a name="4161922" id="comment_anchor_4161922"></a>
+
+ 
+<span class="comment_date">2019-01-13 21:02</span>
+
+ 
+
+            <a id="a_comment_author_4161922" href="https://www.cnblogs.com/zhoulujun/" target="_blank">zhoulujun</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4161922" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    详细文章链接：<a href="http://blog.51cto.com/zhoulujun/2154210" target="_blank">http://blog.51cto.com/zhoulujun/2154210</a>
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4161922, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4161922, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/chenguangliang/p/5856701.html#4528687" class="layer">#14楼</a>
+<a name="4528687" id="comment_anchor_4528687"></a>
+
+        <span id="comment-maxId" style="display:none">4528687</span>
+        <span id="comment-maxDate" style="display:none">2020/3/22 上午1:17:34</span>
+ 
+<span class="comment_date">2020-03-22 01:17</span>
+
+ 
+
+            <a id="a_comment_author_4528687" href="https://www.cnblogs.com/Lumia1020/" target="_blank">Lumia1020</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4528687" data-format-type="Markdown" class="blog_comment_body cnblogs-markdown">
+    <p>很好的文章</p>
+
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4528687, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4528687, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_4528687_avatar" style="display:none">
+            https://pic.cnblogs.com/face/620936/20170119143545.png
+        </span>
+
+			</div>
+		</div>
+
+<div id="comment_pager_bottom">
+    
+</div>
+
+
+</div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/chenguangliang/p/5856701.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/chenguangliang/p/5856701.html#top">返回顶部</a></div>
+    <div id="comment_form_container" style="visibility: visible;"><div class="login_tips">
+    注册用户登录后才能发表评论，请 
+    <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a>
+     或 
+    <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，
+    <a href="https://www.cnblogs.com/">访问</a> 网站首页。
+</div></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-ucancode&#39;)">【推荐】超50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="https://developer.aliyun.com/ask/257905?utm_content=g_1000088947" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-阿里云开发者社区&#39;)">【推荐】精品问答：Java 技术 1000 问</a><br><a href="https://developer.aliyun.com/article/727136?utm_content=g_1000104144" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-阿里云开发者社区&#39;)">【推荐】独家下载 |《大数据工程师必读手册》揭秘阿里如何玩转大数据</a><br></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/gpt.js.下载"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;" data-google-query-id="CKu63N3wm-kCFQjPfAodWgwGDQ"><div id="google_ads_iframe_/1090369/C1_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/C1_0" title="3rd party ad content" name="google_ads_iframe_/1090369/C1_0" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border: 0px; vertical-align: bottom;" data-google-container-id="1" data-load-complete="true" src="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/saved_resource.html"></iframe></div></div>
+    </div>
+    <div id="under_post_news"><div class="recomm-block"><b>相关博文：</b><br>·  <a title="js模块化编程之彻底弄懂CommonJS和AMD/CMD！" href="https://www.cnblogs.com/moxiaowohuwei/p/8692359.html" target="_blank" onclick="clickRecomItmem(8692359)">js模块化编程之彻底弄懂CommonJS和AMD/CMD！</a><br>·  <a title="彻底弄懂CommonJS和AMD/CMD！" href="https://www.cnblogs.com/liuchuanfeng/p/6792260.html" target="_blank" onclick="clickRecomItmem(6792260)">彻底弄懂CommonJS和AMD/CMD！</a><br>·  <a title="彻底弄懂CommonJS和AMD/CMD！" href="https://www.cnblogs.com/h2zZhou/p/7447903.html" target="_blank" onclick="clickRecomItmem(7447903)">彻底弄懂CommonJS和AMD/CMD！</a><br>·  <a title="JS模块化-requireJS" href="https://www.cnblogs.com/sin0/p/7788841.html" target="_blank" onclick="clickRecomItmem(7788841)">JS模块化-requireJS</a><br>·  <a title="AMD CMD 和 CommonJS" href="https://www.cnblogs.com/scotttu/p/6539664.html" target="_blank" onclick="clickRecomItmem(6539664)">AMD CMD 和 CommonJS</a><br>»  <a target="_blank" href="https://recomm.cnblogs.com/blogpost/5856701">更多推荐...</a><div id="cnblogs_t5"><a href="https://developer.aliyun.com/article/717197?utm_content=g_1000088944" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T5-阿里云开发者社区&#39;)">开放下载！《长安十二时辰》爆款背后的优酷技术秘籍首次公开</a></div></div></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;" data-google-query-id="CKy63N3wm-kCFQjPfAodWgwGDQ">
+            
+        <div id="google_ads_iframe_/1090369/C2_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/C2_0" title="3rd party ad content" name="google_ads_iframe_/1090369/C2_0" width="468" height="60" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border: 0px; vertical-align: bottom;" data-google-container-id="2" data-load-complete="true" src="./js模块化编程之彻底弄懂CommonJS和AMD_CMD！ - 每天都要学进去一些 - 博客园_files/saved_resource(1).html"></iframe></div></div>
+    </div>
+    <div id="under_post_kb">
+<div class="itnews c_ad_block">
+    <b>最新 IT 新闻</b>:
+    <br>
+ ·              <a href="https://news.cnblogs.com/n/661164/" target="_blank">Chrome 移动版打开 100 页会出现小彩蛋</a>
+            <br>
+ ·              <a href="https://news.cnblogs.com/n/661163/" target="_blank">GNU C 标准库增加对兆芯 CPU 的检测支持</a>
+            <br>
+ ·              <a href="https://news.cnblogs.com/n/661162/" target="_blank">EA公布其年度发布会EA Play Live 2020举办时间</a>
+            <br>
+ ·              <a href="https://news.cnblogs.com/n/661161/" target="_blank">亚马逊副总裁辞职 称该公司解雇抗议工人的做法是“懦夫”行为</a>
+            <br>
+ ·              <a href="https://news.cnblogs.com/n/661159/" target="_blank">Ghost博客平台服务器被黑客攻击并安装了加密货币挖掘软件</a>
+            <br>
+    » <a href="https://news.cnblogs.com/" title="IT 新闻" target="_blank">更多新闻...</a>
+</div></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem"><!--done-->
+<h3 class="catListTitle">公告</h3>
+
+<div id="blog-news">
+    
+    <div id="profile_block">
+        昵称：
+        <a href="https://home.cnblogs.com/u/chenguangliang/">
+            每天都要学进去一些
+        </a>
+        <br>
+        园龄：
+        <a href="https://home.cnblogs.com/u/chenguangliang/" title="入园时间：2016-06-23">
+            3年10个月
+        </a>
+        <br>
+        粉丝：
+        <a href="https://home.cnblogs.com/u/chenguangliang/followers/">
+            45
+        </a>
+        <br>
+        关注：
+        <a href="https://home.cnblogs.com/u/chenguangliang/followees/">
+            10
+        </a>
+        <div id="p_b_follow">
+<a href="javascript:void(0)" onclick="follow(&#39;3c728f1c-3139-e611-9fc1-ac853d9f53cc&#39;)">+加关注</a></div>
+        <script>getFollowStatus('3c728f1c-3139-e611-9fc1-ac853d9f53cc');</script>
+    </div>
+</div>
+
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="">
+
+<table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar" border="0">
+    <tbody>
+        <tr>
+            <td colspan="7">
+                <table class="CalTitle" cellspacing="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="CalNextPrev">
+                                <a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2020/04/05&#39;); return false;">&lt;</a>
+                            </td>
+                            <td align="center">2020年5月</td>
+                            <td align="right" class="CalNextPrev">
+                                <a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2020/06/05&#39;); return false;">&gt;</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+                    <th class="CalDayHeader" align="center" abbr="日" scope="col">日</th>
+                    <th class="CalDayHeader" align="center" abbr="一" scope="col">一</th>
+                    <th class="CalDayHeader" align="center" abbr="二" scope="col">二</th>
+                    <th class="CalDayHeader" align="center" abbr="三" scope="col">三</th>
+                    <th class="CalDayHeader" align="center" abbr="四" scope="col">四</th>
+                    <th class="CalDayHeader" align="center" abbr="五" scope="col">五</th>
+                    <th class="CalDayHeader" align="center" abbr="六" scope="col">六</th>
+        </tr>
+            <tr>
+                            <td class="CalOtherMonthDay" align="center">26</td>
+                            <td class="CalOtherMonthDay" align="center">27</td>
+                            <td class="CalOtherMonthDay" align="center">28</td>
+                            <td class="CalOtherMonthDay" align="center">29</td>
+                            <td class="CalOtherMonthDay" align="center">30</td>
+                        <td class="" align="center">
+                            1
+                        </td>
+                    <td class="CalWeekendDay" align="center">
+                        2
+                    </td>
+            </tr>
+                <tr>
+                        <td class="CalWeekendDay" align="center">
+                            3
+                        </td>
+                            <td class="" align="center">
+                                4
+                            </td>
+                            <td class="CalTodayDay" align="center">
+                                5
+                            </td>
+                            <td class="" align="center">
+                                6
+                            </td>
+                            <td class="" align="center">
+                                7
+                            </td>
+                            <td class="" align="center">
+                                8
+                            </td>
+                        <td class="CalWeekendDay" align="center">
+                            9
+                        </td>
+                </tr>
+                <tr>
+                        <td class="CalWeekendDay" align="center">
+                            10
+                        </td>
+                            <td class="" align="center">
+                                11
+                            </td>
+                            <td class="" align="center">
+                                12
+                            </td>
+                            <td class="" align="center">
+                                13
+                            </td>
+                            <td class="" align="center">
+                                14
+                            </td>
+                            <td class="" align="center">
+                                15
+                            </td>
+                        <td class="CalWeekendDay" align="center">
+                            16
+                        </td>
+                </tr>
+                <tr>
+                        <td class="CalWeekendDay" align="center">
+                            17
+                        </td>
+                            <td class="" align="center">
+                                18
+                            </td>
+                            <td class="" align="center">
+                                19
+                            </td>
+                            <td class="" align="center">
+                                20
+                            </td>
+                            <td class="" align="center">
+                                21
+                            </td>
+                            <td class="" align="center">
+                                22
+                            </td>
+                        <td class="CalWeekendDay" align="center">
+                            23
+                        </td>
+                </tr>
+                <tr>
+                        <td class="CalWeekendDay" align="center">
+                            24
+                        </td>
+                            <td class="" align="center">
+                                25
+                            </td>
+                            <td class="" align="center">
+                                26
+                            </td>
+                            <td class="" align="center">
+                                27
+                            </td>
+                            <td class="" align="center">
+                                28
+                            </td>
+                            <td class="" align="center">
+                                29
+                            </td>
+                        <td class="CalWeekendDay" align="center">
+                            30
+                        </td>
+                </tr>
+                <tr>
+                        <td class="CalWeekendDay" align="center">
+                            31
+                        </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                1
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                2
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                3
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                4
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                5
+                            </td>
+                        <td class="CalOtherMonthDay" align="center">
+                            6
+                        </td>
+                </tr>
+    </tbody>
+</table></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn">
+<!-- 搜索 -->
+<div id="sidebar_search" class="sidebar-block">
+    <div id="sidebar_search" class="mySearch">
+        <h3 class="catListTitle">搜索</h3>
+        <div id="sidebar_search_box">
+            <div id="widget_my_zzk" class="div_my_zzk">
+                <input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk">
+            </div>
+            <div id="widget_my_google" class="div_my_zzk">
+                <input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 常用链接 -->
+<div id="sidebar_shortcut" class="sidebar-block">
+    <div class="catListLink">
+<h3 class="catListTitle">
+常用链接
+</h3>
+<ul>
+		<li>
+
+<a href="https://www.cnblogs.com/chenguangliang/p/" title="我的博客的随笔列表">我的随笔</a>
+</li>
+		<li>
+
+<a href="https://www.cnblogs.com/chenguangliang/MyComments.html" title="我的发表过的评论列表">我的评论</a>
+</li>
+		<li>
+
+<a href="https://www.cnblogs.com/chenguangliang/OtherPosts.html" title="我评论过的随笔列表">我的参与</a>
+</li>
+		<li>
+
+<a href="https://www.cnblogs.com/chenguangliang/RecentComments.html" title="我的博客的评论列表">最新评论</a>
+</li>
+		<li>
+
+<a href="https://www.cnblogs.com/chenguangliang/tag/" title="我的博客的标签列表">我的标签</a>
+</li>
+
+</ul>
+<div id="itemListLin_con" style="display:none;">
+<ul>
+
+</ul>
+</div>
+</div>
+
+
+</div>
+
+<!-- 最新随笔 -->
+
+
+
+<!-- 我的标签 -->
+<div id="sidebar_toptags" class="sidebar-block">
+    
+</div>
+
+<!-- 积分与排名 -->
+
+
+<!-- 随笔分类、随笔档案、文章分类、新闻分类、相册、链接 -->
+<div id="sidebar_categories">
+    
+        <div id="sidebar_postcategory" class="catListPostCategory sidebar-block">
+            <h3 class="catListTitle">
+                
+
+随笔分类
+
+
+
+            </h3>
+
+
+            <ul>
+
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/category/1614984.html" rel="" target="">
+    axios、ajax(1)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/category/951772.html" rel="" target="">
+    cookie和HTMl5中的sessionStorage与localStorage(1)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/category/980226.html" rel="" target="">
+    javascript(8)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/category/1475792.html" rel="" target="">
+    jquery(2)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/category/951195.html" rel="" target="">
+    jsonp/ajax 自己的一些总结(2)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/category/1612813.html" rel="" target="">
+    vscode(1)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/category/872135.html" rel="" target="">
+    vue(4)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/category/872137.html" rel="" target="">
+    常用小功能(6)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/category/880201.html" rel="" target="">
+    前端工程化/模块化(6)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/category/947803.html" rel="" target="">
+    杂记(10)
+</a>
+ 
+
+                        </li>
+
+            </ul>
+
+
+        </div>
+        <div id="sidebar_postarchive" class="catListPostArchive sidebar-block">
+            <h3 class="catListTitle">
+                
+
+随笔档案
+
+
+
+            </h3>
+
+
+            <ul>
+
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/archive/2020/03.html" rel="" target="">
+    2020年3月(1)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/archive/2019/12.html" rel="" target="">
+    2019年12月(3)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/archive/2019/11.html" rel="" target="">
+    2019年11月(3)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/archive/2019/08.html" rel="" target="">
+    2019年8月(3)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/archive/2019/06.html" rel="" target="">
+    2019年6月(6)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/archive/2019/04.html" rel="" target="">
+    2019年4月(3)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/archive/2019/02.html" rel="" target="">
+    2019年2月(1)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/archive/2018/11.html" rel="" target="">
+    2018年11月(1)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/archive/2018/08.html" rel="" target="">
+    2018年8月(1)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/archive/2018/07.html" rel="" target="">
+    2018年7月(4)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/archive/2017/09.html" rel="" target="">
+    2017年9月(1)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/archive/2017/06.html" rel="" target="">
+    2017年6月(3)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/archive/2017/04.html" rel="" target="">
+    2017年4月(6)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/archive/2017/03.html" rel="" target="">
+    2017年3月(4)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/archive/2017/02.html" rel="" target="">
+    2017年2月(7)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/archive/2016/09.html" rel="" target="">
+    2016年9月(2)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/chenguangliang/archive/2016/08.html" rel="" target="">
+    2016年8月(2)
+</a>
+ 
+
+                        </li>
+
+            </ul>
+
+
+        </div>
+
+</div>
+
+<!-- 最新评论 -->
+<div id="sidebar_recentcomments" class="sidebar-block">
+    <div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+
+	<div class="RecentCommentBlock">
+        <ul>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/chenguangliang/p/11383306.html">1. Re:svn提交时把node_modules忽略掉</a></li>
+                    <li class="recent_comment_body"><p></p>
+</li>
+                    <li class="recent_comment_author">--胡萝卜雨</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/chenguangliang/p/11383306.html">2. Re:svn提交时把node_modules忽略掉</a></li>
+                    <li class="recent_comment_body"><p>我怎么不生效啊</p>
+</li>
+                    <li class="recent_comment_author">--胡萝卜雨</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/chenguangliang/p/10716721.html">3. Re:webpack版本兼容性问题错误总结，耽误半天学习</a></li>
+                    <li class="recent_comment_body"><p>我只想跟你握个手。。标题太符合我了</p>
+</li>
+                    <li class="recent_comment_author">--この世界，何もない</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/chenguangliang/p/5856701.html">4. Re:js模块化编程之彻底弄懂CommonJS和AMD/CMD！</a></li>
+                    <li class="recent_comment_body"><p>很好的文章</p>
+</li>
+                    <li class="recent_comment_author">--Lumia1020</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/chenguangliang/p/6708592.html">5. Re:HTTP报文（面试会问开发时常用的报文头格式）</a></li>
+                    <li class="recent_comment_body">感谢分享。最后一张图很清楚</li>
+                    <li class="recent_comment_author">--Errol_King</li>
+        </ul>
+    </div>
+</div>
+
+
+</div>
+
+
+
+<!-- 阅读排行榜 -->
+<div id="sidebar_topviewedposts" class="sidebar-block">
+    <div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock">
+        <ul style="word-break:break-all">
+                    <li>
+                        <a href="https://www.cnblogs.com/chenguangliang/p/5856701.html">
+                            1. js模块化编程之彻底弄懂CommonJS和AMD/CMD！(96300)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/chenguangliang/p/6636660.html">
+                            2. 移动端的touchstart,touchmove,touchend事件中的获取当前touch位置(13375)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/chenguangliang/p/6688730.html">
+                            3. javaScript中用eval()方法转换json对象(12733)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/chenguangliang/p/6433462.html">
+                            4. webstorm中es6语法报错，.vue文件中es6语法报错(9321)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/chenguangliang/p/7576362.html">
+                            5. vue-webpack 做出来的项目部署到服务器上，点开是空白页（我这里把项目发布到git上）(5557)
+                        </a>
+                    </li>
+        </ul>
+    </div>
+</div>
+
+
+</div>
+
+<!-- 评论排行榜 -->
+<div id="sidebar_topcommentedposts" class="sidebar-block">
+    <div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock">
+        <ul style="word-break:break-all">
+                    <li>
+                        <a href="https://www.cnblogs.com/chenguangliang/p/5856701.html">
+                            1. js模块化编程之彻底弄懂CommonJS和AMD/CMD！(14)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/chenguangliang/p/11383306.html">
+                            2. svn提交时把node_modules忽略掉(2)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/chenguangliang/p/6433462.html">
+                            3. webstorm中es6语法报错，.vue文件中es6语法报错(1)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/chenguangliang/p/6708592.html">
+                            4. HTTP报文（面试会问开发时常用的报文头格式）(1)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/chenguangliang/p/10716721.html">
+                            5. webpack版本兼容性问题错误总结，耽误半天学习(1)
+                        </a>
+                    </li>
+        </ul>
+    </div>
+</div>
+
+
+</div>
+
+<!-- 推荐排行榜 -->
+<div id="sidebar_topdiggedposts" class="sidebar-block">
+    
+<div id="topdigg_posts_wrap">
+    <div class="catListView">
+        <h3 class="catListTitle">推荐排行榜</h3>
+        <div id="TopDiggPostsBlock">
+            <ul style="word-break: break-all">
+                        <li>
+                            <a href="https://www.cnblogs.com/chenguangliang/p/5856701.html">
+                                1. js模块化编程之彻底弄懂CommonJS和AMD/CMD！(24)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/chenguangliang/p/10716721.html">
+                                2. webpack版本兼容性问题错误总结，耽误半天学习(3)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/chenguangliang/p/6433462.html">
+                                3. webstorm中es6语法报错，.vue文件中es6语法报错(2)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/chenguangliang/p/6708592.html">
+                                4. HTTP报文（面试会问开发时常用的报文头格式）(1)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/chenguangliang/p/9540518.html">
+                                5. sass/scss 和 less的区别(1)
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright © 2020 每天都要学进去一些
+<br><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+
+</body></html>
